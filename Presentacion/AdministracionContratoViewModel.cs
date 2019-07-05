@@ -39,6 +39,7 @@ namespace OnBreakEventos
             {
                 _contrato = value;
 
+
                 if (value.Tipo != null)
                 {
                     try
@@ -60,9 +61,11 @@ namespace OnBreakEventos
                     }
                 }
 
+                if (value != null)
+                    value.PropertyChanged += Contrato_PropertyChanged;
 
                 if(value.Cliente != null)
-                    Contrato.Cliente.PropertyChanged += Cliente_PropertyChanged;
+                    value.Cliente.PropertyChanged += Cliente_PropertyChanged;
 
 
                 NotifyPropertyChanged();
@@ -336,31 +339,27 @@ namespace OnBreakEventos
         {
             // Creamos o modificamos un contrato
 
-            ContratoEntity contrato = null;
+
+            bool existeContrato = false;
+
 
             if (!String.IsNullOrEmpty(Contrato.NumeroContrato))
             {
-                contrato = ContratoDAO.BuscarPorNumero(Contrato.NumeroContrato);
-
+                if (ContratoDAO.BuscarPorNumero(Contrato.NumeroContrato) != null)
+                {
+                    existeContrato = true;
+                }
             }
 
-            bool existeContrato = true;
-
-            if (contrato == null) // Si no hay ningún contrato asociado al numero en el TextBox, estamos creando uno nuevo, no modificando
-            {
-                existeContrato = false;
-                contrato = this.Contrato;
-                contrato.NumeroContrato = DateTime.Now.ToString("yyyyMMddHHmm");
-
-            }
 
             if (existeContrato == false)
             {
-                ContratoDAO.Crear(contrato);
+                this.Contrato.NumeroContrato = DateTime.Now.ToString("yyyyMMddHHmm");
+                ContratoDAO.Crear(this.Contrato);
             }
             else
             {
-                ContratoDAO.Modificar(contrato);
+                ContratoDAO.Modificar(this.Contrato);
             }
 
             MessageBox.Show("Guardado correctamente");
