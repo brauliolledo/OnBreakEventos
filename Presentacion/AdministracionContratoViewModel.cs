@@ -591,7 +591,30 @@ namespace OnBreakEventos
 
             CrearMementoTimer.Elapsed += CrearMementoTimer_Elapsed;
 
-            MementoActual = new NullAdministracionContratoMemento();
+
+            Caretaker.RestaurarMementos();
+
+            if(Caretaker.Mementos.Count > 0)
+            {
+                MessageBoxResult messageBoxResult = MessageBox.Show($"Hay una sesión anterior, con {Caretaker.Mementos.Count} cachés de trabajo. ¿Desea restaurarla?", 
+                    "Caché de trabajo", MessageBoxButton.YesNoCancel, MessageBoxImage.Information);
+
+                if(messageBoxResult == MessageBoxResult.Yes)
+                {
+                    MementoActual = Caretaker.Mementos.ElementAt(Caretaker.Mementos.Count - 1);
+                    RestaurarMemento(Caretaker.Mementos.ElementAt(Caretaker.Mementos.Count - 1));
+                }
+                else
+                {
+                    Caretaker.DesecharMementos();
+                }
+  
+            }
+            else
+            {
+                MementoActual = new NullAdministracionContratoMemento();
+
+            }
         }
 
         private void CrearMementoTimer_Elapsed(object sender, ElapsedEventArgs e)

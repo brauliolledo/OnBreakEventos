@@ -40,5 +40,11 @@ namespace Persistencia.lib.caretaker
             _mementos = cacheContratoDAO.ObtenerTodos();
         }
 
+        public void DesecharMementos()
+        {
+            _mementos = new List<AdministracionContratoMemento>();
+            cacheContratoDAO.BorrarTodo();
+        }
+
     }
 }
