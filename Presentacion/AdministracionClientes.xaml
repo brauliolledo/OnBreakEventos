@@ -8,7 +8,9 @@
 
         xmlns:local="clr-namespace:OnBreakEventos"
         mc:Ignorable="d"
-        Title="OnBreak - Administracion de Clientes"  Height="656.129" Width="897" Icon="app/Images/Icono.ico" >
+        Title="OnBreak - Administracion de Clientes"  Height="656.129" Width="897" Icon="app/Images/Icono.ico"
+        xmlns:utils="clr-namespace:OnBreakEventos.app.utils"
+        utils:EnterKeyTraversal.IsEnabled="True">
     <Window.Resources>
         <converters:SqlMinDateToNullConverter x:Key="SqlMinDateConverter" />
     </Window.Resources>
@@ -28,7 +30,7 @@
             <Image Source="app/Images/ClientSearch.png" Height="20" Width="21" RenderOptions.BitmapScalingMode="Fant"></Image>
         </Button>
 
-        <Button x:Name="btn_buscarPorRutLista" HorizontalAlignment="Left" Margin="201,108,0,0" Padding="0" VerticalAlignment="Top" Width="32" Height="26" Click="Btn_buscarPorRutLista_Click">
+        <Button x:Name="btn_buscarPorRutLista" HorizontalAlignment="Left" Margin="201,108,0,0" Padding="0" VerticalAlignment="Top" Width="32" Height="26" Click="Btn_buscarPorRutLista_Click" KeyboardNavigation.IsTabStop="False">
             <Image Source="app/Images/DataSearch.png" Height="20" Width="21" RenderOptions.BitmapScalingMode="Fant"></Image>
         </Button>
 

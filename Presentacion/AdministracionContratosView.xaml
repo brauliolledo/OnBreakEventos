@@ -7,9 +7,13 @@
         xmlns:ie="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:converters="clr-namespace:OnBreakEventos.app.converters"
         xmlns:local="clr-namespace:OnBreakEventos"
+            
         xmlns:entity="clr-namespace:Persistencia.lib.entity;assembly=Persistencia"
                 mc:Ignorable="d"
-        Title="OnBreak - Administración de contratos" Height="800.81" Width="887.889" Icon="app/Images/Icono.ico">
+        Title="OnBreak - Administración de contratos" Height="800.81" Width="887.889" Icon="app/Images/Icono.ico"
+                      
+        xmlns:utils="clr-namespace:OnBreakEventos.app.utils"
+        utils:EnterKeyTraversal.IsEnabled="True">
     <Window.DataContext>
         <local:AdministracionContratoViewModel></local:AdministracionContratoViewModel>
     </Window.DataContext>
@@ -39,7 +43,7 @@
                 </ie:EventTrigger>
             </ie:Interaction.Triggers>
         </TextBox>
-        <Button x:Name="btn_buscarContrato" HorizontalAlignment="Left" Margin="198,110,0,0" Padding="0" VerticalAlignment="Top" Width="32" Height="26">
+        <Button  x:Name="btn_buscarContrato" HorizontalAlignment="Left" Margin="198,110,0,0" Padding="0" VerticalAlignment="Top" Width="32" Height="26" KeyboardNavigation.IsTabStop="False">
             <Image Source="app/Images/DataSearch.png" Height="20" Width="21" RenderOptions.BitmapScalingMode="Fant"></Image>
 
             <ie:Interaction.Triggers>
@@ -110,7 +114,7 @@
         <TextBox x:Name="txt_busquedaClienteRut" HorizontalAlignment="Left" Height="23" Margin="96,266,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="132" Text="{Binding RutBusquedaCliente, Mode=TwoWay, UpdateSourceTrigger=LostFocus}">
         </TextBox>
         <Label Content="RUT Cliente *:" HorizontalAlignment="Left" Margin="8,266,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="btn_buscarCliente" HorizontalAlignment="Left" Margin="236,266,0,0" Padding="0" VerticalAlignment="Top" Width="32" Height="26">
+        <Button x:Name="btn_buscarCliente" HorizontalAlignment="Left" Margin="236,266,0,0" Padding="0" VerticalAlignment="Top" Width="32" Height="26" KeyboardNavigation.IsTabStop="False">
             <Image Source="app/Images/DataSearch.png" Height="20" Width="21" RenderOptions.BitmapScalingMode="Fant"/>
 
             <ie:Interaction.Triggers>

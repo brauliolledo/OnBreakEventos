@@ -75,6 +75,7 @@
     <Compile Include="app\converters\ClaseTienePropiedadConverter.cs" />
     <Compile Include="app\converters\IsSqlMinDateConverter.cs" />
     <Compile Include="app\converters\SqlMinDateToNullConverter.cs" />
+    <Compile Include="app\utils\EnterKeyTraversal.cs" />
     <Compile Include="ListadoAuxiliarDecorator.cs" />
     <Compile Include="ListadoClientes.xaml.cs">
       <DependentUpon>ListadoClientes.xaml</DependentUpon>
