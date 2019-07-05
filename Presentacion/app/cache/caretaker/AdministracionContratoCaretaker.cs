@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Timers;
 using System.Threading.Tasks;
 
 namespace Persistencia.lib.caretaker
@@ -25,11 +26,24 @@ namespace Persistencia.lib.caretaker
             _mementos = new List<AdministracionContratoMemento>();
 
             cacheContratoDAO = new CacheContratoDAO();
+
+            Timer PersistirTimer = new Timer(6 * 60 * 1000);
+
+            PersistirTimer.Elapsed += (s, e) =>
+            {
+                Console.WriteLine("Guardando caché en base de datos.");
+                this.PersistirMementos();
+            };
+
+            PersistirTimer.Start();
         }
 
         public void PersistirMementos()
         {
-            foreach(AdministracionContratoMemento memento in Mementos)
+
+            cacheContratoDAO.BorrarTodo();
+
+            foreach (AdministracionContratoMemento memento in Mementos)
             {
                 cacheContratoDAO.Insertar(memento);
             }

@@ -600,7 +600,7 @@ namespace OnBreakEventos
             };
         }
 
-        #region IniciarCacheCommand
+        #region InicializarCacheCommand
 
         private RelayCommand _inicializarCacheCommand;
 
@@ -651,7 +651,7 @@ namespace OnBreakEventos
             }
         }
 
-        public const int IntervaloMemento = 10000;
+        public const int IntervaloMemento = 5 * 60 * 1000;
 
         public void InicializarCache()
         {
@@ -659,6 +659,7 @@ namespace OnBreakEventos
 
             CrearMementoTimer.Elapsed += CrearMementoTimer_Elapsed;
 
+            CrearMementoTimer.Start();
 
             Caretaker.RestaurarMementos();
 
@@ -687,6 +688,7 @@ namespace OnBreakEventos
 
         private void CrearMementoTimer_Elapsed(object sender, ElapsedEventArgs e)
         {
+            Console.WriteLine("Guardando estado en caché.");
             AlmacenarEstadoEnCache();
         }
 
@@ -702,13 +704,60 @@ namespace OnBreakEventos
         {
             ContratoEntity contrato;
 
-            if(this.Contrato is NullContratoEntity)
+            TipoEventoEntity tipoEvento = null;
+
+            if (this.Contrato.Tipo != null)
+            {
+                if (this.Contrato.Tipo is CoffeeBreakEntity)
+                {
+                    tipoEvento = new CoffeeBreakEntity()
+                    {
+                        Id = this.Contrato.Tipo.Id,
+                        Descripcion = this.Contrato.Tipo.Descripcion,
+                        Vegetariana = (this.Contrato.Tipo as CoffeeBreakEntity).Vegetariana
+                    };
+                }
+                else if (this.Contrato.Tipo is CocktailEntity)
+                {
+                    tipoEvento = new CocktailEntity()
+                    {
+                        Id = this.Contrato.Tipo.Id,
+                        Descripcion = this.Contrato.Tipo.Descripcion,
+                        Ambientacion = ((this.Contrato.Tipo as CocktailEntity).Ambientacion == null) ? new NullTipoAmbientacionEntity() : (this.Contrato.Tipo as CocktailEntity).Ambientacion,
+                        MusicaAmbiental = (this.Contrato.Tipo as CocktailEntity).MusicaAmbiental,
+                        MusicaCliente = (this.Contrato.Tipo as CocktailEntity).MusicaCliente
+                    };
+                }
+                else if (this.Contrato.Tipo is CenaEntity)
+                {
+                    tipoEvento = new CenaEntity()
+                    {
+                        Id = this.Contrato.Tipo.Id,
+                        Descripcion = this.Contrato.Tipo.Descripcion,
+                        Ambientacion = ((this.Contrato.Tipo as CenaEntity).Ambientacion == null) ? new NullTipoAmbientacionEntity() : (this.Contrato.Tipo as CocktailEntity).Ambientacion,
+                        MusicaAmbiental = (this.Contrato.Tipo as CenaEntity).MusicaAmbiental,
+                        LocalOnBreak = (this.Contrato.Tipo as CenaEntity).LocalOnBreak,
+                        OtroLocal = (this.Contrato.Tipo as CenaEntity).OtroLocal,
+                        ValorArriendo = (this.Contrato.Tipo as CenaEntity).ValorArriendo
+                    };
+                }
+                else
+                {
+                    tipoEvento = new TipoEventoEntity()
+                    {
+                        Id = this.Contrato.Tipo.Id,
+                        Descripcion = this.Contrato.Tipo.Descripcion,
+                    };
+                }
+            }
+
+            if (this.Contrato is NullContratoEntity)
             {
                 contrato = new NullContratoEntity()
                 {
                     Asistentes = this.Contrato.Asistentes,
                     Cliente = this.Contrato.Cliente,
-                    Tipo = this.Contrato.Tipo,
+                    Tipo = tipoEvento,
                     Creacion = this.Contrato.Creacion,
                     InicioEvento = this.Contrato.InicioEvento,
                     ModalidadServicio = this.Contrato.ModalidadServicio,
@@ -728,7 +777,7 @@ namespace OnBreakEventos
                 {
                     Asistentes = this.Contrato.Asistentes,
                     Cliente = this.Contrato.Cliente,
-                    Tipo = this.Contrato.Tipo,
+                    Tipo = tipoEvento,
                     Creacion = this.Contrato.Creacion,
                     InicioEvento = this.Contrato.InicioEvento,
                     ModalidadServicio = this.Contrato.ModalidadServicio,
@@ -760,13 +809,62 @@ namespace OnBreakEventos
 
             MementoActual = memento;
 
+            TipoEventoEntity tipoEvento = null;
+
+            if(memento.Contrato.Tipo != null)
+            {
+                if (memento.Contrato.Tipo is CoffeeBreakEntity)
+                {
+                    tipoEvento = new CoffeeBreakEntity()
+                    {
+                        Id = memento.Contrato.Tipo.Id,
+                        Descripcion = memento.Contrato.Tipo.Descripcion,
+                        Vegetariana = (memento.Contrato.Tipo as CoffeeBreakEntity).Vegetariana
+                    };
+                }
+                else if (memento.Contrato.Tipo is CocktailEntity)
+                {
+                    tipoEvento = new CocktailEntity()
+                    {
+                        Id = memento.Contrato.Tipo.Id,
+                        Descripcion = memento.Contrato.Tipo.Descripcion,
+                        Ambientacion = ((memento.Contrato.Tipo as CocktailEntity).Ambientacion == null) ? new NullTipoAmbientacionEntity() : (memento.Contrato.Tipo as CocktailEntity).Ambientacion,
+                        MusicaAmbiental = (memento.Contrato.Tipo as CocktailEntity).MusicaAmbiental,
+                        MusicaCliente = (memento.Contrato.Tipo as CocktailEntity).MusicaCliente
+                    };
+                }
+                else if (memento.Contrato.Tipo is CenaEntity)
+                {
+                    tipoEvento = new CenaEntity()
+                    {
+                        Id = memento.Contrato.Tipo.Id,
+                        Descripcion = memento.Contrato.Tipo.Descripcion,
+                        Ambientacion = ((memento.Contrato.Tipo as CocktailEntity).Ambientacion == null) ? new NullTipoAmbientacionEntity() : (memento.Contrato.Tipo as CocktailEntity).Ambientacion,
+                        MusicaAmbiental = (memento.Contrato.Tipo as CocktailEntity).MusicaAmbiental,
+                        LocalOnBreak = (memento.Contrato.Tipo as CenaEntity).LocalOnBreak,
+                        OtroLocal = (memento.Contrato.Tipo as CenaEntity).OtroLocal,
+                        ValorArriendo = (memento.Contrato.Tipo as CenaEntity).ValorArriendo
+                    };
+                }
+                else
+                {
+                    tipoEvento = new TipoEventoEntity()
+                    {
+                        Id = memento.Contrato.Tipo.Id,
+                        Descripcion = memento.Contrato.Tipo.Descripcion,
+                    };
+                }
+            }
+
+
+
             if (this.Contrato is NullContratoEntity)
             {
                 this.Contrato = new NullContratoEntity()
                 {
                     Asistentes = memento.Contrato.Asistentes,
                     Cliente = memento.Contrato.Cliente ?? new NullClienteEntity(),
-                    Tipo = memento.Contrato.Tipo,
+                    Tipo = tipoEvento,
                     Creacion = memento.Contrato.Creacion,
                     InicioEvento = memento.Contrato.InicioEvento,
                     ModalidadServicio = memento.Contrato.ModalidadServicio,
@@ -786,7 +884,7 @@ namespace OnBreakEventos
                 {
                     Asistentes = memento.Contrato.Asistentes,
                     Cliente = memento.Contrato.Cliente ?? new NullClienteEntity(),
-                    Tipo = memento.Contrato.Tipo,
+                    Tipo = tipoEvento,
                     Creacion = memento.Contrato.Creacion,
                     InicioEvento = memento.Contrato.InicioEvento,
                     ModalidadServicio = memento.Contrato.ModalidadServicio,
