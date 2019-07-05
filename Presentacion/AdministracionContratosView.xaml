@@ -10,7 +10,7 @@
             
         xmlns:entity="clr-namespace:Persistencia.lib.entity;assembly=Persistencia"
                 mc:Ignorable="d"
-        Title="OnBreak - Administración de contratos" Height="800.81" Width="887.889" Icon="app/Images/Icono.ico"
+        Title="OnBreak - Administración de contratos" Height="740.81" Width="887.889" Icon="app/Images/Icono.ico"
                       
         xmlns:utils="clr-namespace:OnBreakEventos.app.utils"
         utils:EnterKeyTraversal.IsEnabled="True">
@@ -23,7 +23,14 @@
         <converters:ClaseTienePropiedadConverter x:Key="ClaseTienePropiedadConverter" />
         <converters:BooleanAVisibilidadConverter x:Key="BooleanAVisibilidadConverter"/>
     </Window.Resources>
-    <Grid>
+
+    <ie:Interaction.Triggers>
+        <ie:EventTrigger EventName="Loaded">
+            <ie:InvokeCommandAction Command="{Binding InicializarCacheCommand}"/>
+        </ie:EventTrigger>
+    </ie:Interaction.Triggers>
+
+    <Grid Margin="0,-2,0,2">
 
         <Image Source="app/Images/logo_white_background.jpg"  HorizontalAlignment="Right" VerticalAlignment="Top" Height="224" Margin="0,-50,-25,0" Width="195" RenderOptions.BitmapScalingMode="Fant">
             <Image.Clip>
@@ -58,21 +65,21 @@
         <Label Content="Término: " x:Name="lbl_termino" Margin="32,213,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"></Label>
         <CheckBox x:Name="cb_estaVigente" Content="Vigente" IsHitTestVisible="False" HorizontalAlignment="Left" Margin="252,114,0,0" VerticalAlignment="Top" IsChecked="{Binding Contrato.Termino, Converter={StaticResource IsSqlMinDateConverter}}"/>
 
-        <Controls:DateTimePicker x:Name="dttp_inicioEvento" Margin="459,165,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" SelectedDate="{Binding Contrato.InicioEvento, Converter={StaticResource SqlMinDateConverter}}"></Controls:DateTimePicker>
-        <Controls:DateTimePicker x:Name="dttp_terminoEvento" Margin="717,165,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" SelectedDate="{Binding Contrato.TerminoEvento, Converter={StaticResource SqlMinDateConverter}}"></Controls:DateTimePicker>
-        <Label Content="Observaciones:" x:Name="lbl_observaciones" Margin="377,598,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5">
+        <Controls:DateTimePicker x:Name="dttp_inicioEvento" Margin="459,153,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" SelectedDate="{Binding Contrato.InicioEvento, Converter={StaticResource SqlMinDateConverter}}"></Controls:DateTimePicker>
+        <Controls:DateTimePicker x:Name="dttp_terminoEvento" Margin="717,153,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" SelectedDate="{Binding Contrato.TerminoEvento, Converter={StaticResource SqlMinDateConverter}}"></Controls:DateTimePicker>
+        <Label Content="Observaciones:" x:Name="lbl_observaciones" Margin="377,548,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5">
         </Label>
-        <Label Content="Tipo evento *:" x:Name="lbl_tipoEvento" Margin="370,205,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="29" />
-        <TextBox x:Name="txt_observaciones" HorizontalAlignment="Left" Height="62" Margin="471,598,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="386" Text="{Binding Contrato.Observaciones}"/>
-        <ComboBox x:Name="cmb_tipoEvento" HorizontalAlignment="Left" Margin="459,205,0,0" VerticalAlignment="Top" Width="218" ItemsSource="{Binding TiposEvento}" SelectedItem="{Binding Contrato.Tipo}"/>
-        <TextBox x:Name="txt_precioBase" HorizontalAlignment="Left" Height="23" Margin="457,286,0,0" TextWrapping="Wrap" IsEnabled="False" VerticalAlignment="Top" Width="120" Text="{Binding Contrato.ModalidadServicio.ValorBase}"/>
-        <TextBox x:Name="txt_personalBase" HorizontalAlignment="Left" Height="23" Margin="720,286,0,0" TextWrapping="Wrap" IsEnabled="False" VerticalAlignment="Top" Width="120" Text="{Binding Contrato.ModalidadServicio.PersonalBase}"/>
-        <Label x:Name="lbl_precioBase" Content="Precio base:" HorizontalAlignment="Left" Height="33" Margin="370,286,0,0" VerticalAlignment="Top" Width="82"/>
-        <Label x:Name="lbl_personalBase" Content="Personal base:" HorizontalAlignment="Left" Margin="624,286,0,0" VerticalAlignment="Top"/>
+        <Label Content="Tipo evento *:" x:Name="lbl_tipoEvento" Margin="370,193,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="29" />
+        <TextBox x:Name="txt_observaciones" HorizontalAlignment="Left" Height="62" Margin="471,548,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="386" Text="{Binding Contrato.Observaciones}"/>
+        <ComboBox x:Name="cmb_tipoEvento" HorizontalAlignment="Left" Margin="459,193,0,0" VerticalAlignment="Top" Width="218" ItemsSource="{Binding TiposEvento}" SelectedItem="{Binding Contrato.Tipo}"/>
+        <TextBox x:Name="txt_precioBase" HorizontalAlignment="Left" Height="23" Margin="457,274,0,0" TextWrapping="Wrap" IsEnabled="False" VerticalAlignment="Top" Width="120" Text="{Binding Contrato.ModalidadServicio.ValorBase}"/>
+        <TextBox x:Name="txt_personalBase" HorizontalAlignment="Left" Height="23" Margin="720,274,0,0" TextWrapping="Wrap" IsEnabled="False" VerticalAlignment="Top" Width="120" Text="{Binding Contrato.ModalidadServicio.PersonalBase}"/>
+        <Label x:Name="lbl_precioBase" Content="Precio base:" HorizontalAlignment="Left" Height="33" Margin="370,274,0,0" VerticalAlignment="Top" Width="82"/>
+        <Label x:Name="lbl_personalBase" Content="Personal base:" HorizontalAlignment="Left" Margin="624,274,0,0" VerticalAlignment="Top"/>
 
 
         <Button x:Name="btn_crear" HorizontalAlignment="Left"
-                Margin="29,574,0,0" VerticalAlignment="Top" Width="68" Height="66">
+                Margin="29,536,0,0" VerticalAlignment="Top" Width="68" Height="66">
             <Image Source="app/Images/ContractAdd.png" ToolTip="Nuevo contrato" RenderOptions.BitmapScalingMode="Fant"/>
             <ie:Interaction.Triggers>
                 <ie:EventTrigger EventName="Click">
@@ -81,7 +88,7 @@
             </ie:Interaction.Triggers>
         </Button>
         <Button x:Name="btn_guardarCambios" HorizontalAlignment="Left"
-            Margin="789,686,0,0" VerticalAlignment="Top" Width="68" Height="66" >
+            Margin="789,620,0,0" VerticalAlignment="Top" Width="68" Height="66" >
             <Image Source="app/Images/ContractUpdate.png" ToolTip="
                    cambios" RenderOptions.BitmapScalingMode="Fant"/>
 
@@ -93,7 +100,7 @@
         </Button>
 
         <Button x:Name="btn_terminarContrato" HorizontalAlignment="Left"
-            Margin="665,686,0,0" VerticalAlignment="Top" Width="68" Height="66"  ToolTip="Terminar contrato">
+            Margin="665,620,0,0" VerticalAlignment="Top" Width="68" Height="66"  ToolTip="Terminar contrato">
             <Image Source="app/Images/ContractDelete.png" RenderOptions.BitmapScalingMode="Fant"/>
             <ie:Interaction.Triggers>
                 <ie:EventTrigger EventName="Click">
@@ -103,14 +110,14 @@
         </Button>
         <DatePicker x:Name="dtp_creacion" HorizontalAlignment="Left" Margin="96,164,0,0" VerticalAlignment="Top" Width="127" SelectedDate="{Binding Contrato.Creacion, Converter={StaticResource SqlMinDateConverter}}"/>
         <DatePicker x:Name="dtp_termino" HorizontalAlignment="Left" Margin="96,214,0,0" VerticalAlignment="Top" Width="127" SelectedDate="{Binding Contrato.Termino, Converter={StaticResource SqlMinDateConverter}}" IsEnabled="False"/>
-        <Label x:Name="lbl_inicio" Content="Inicio *:" HorizontalAlignment="Left" Margin="398,165,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lbl_terminoEvento" Content="Finalización *:" HorizontalAlignment="Left" Margin="624,164,0,0" VerticalAlignment="Top" Height="26" Width="86" RenderTransformOrigin="0.917,0.519"/>
-        <Label Content="Asistentes:" HorizontalAlignment="Left" Margin="377,327,0,0" VerticalAlignment="Top"/>
-        <Label Content="Personal adicional" HorizontalAlignment="Left" Margin="605,327,0,0" VerticalAlignment="Top"/>
-        <Controls:NumericUpDown HasDecimals="False" Margin="457,327,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Minimum="1" x:Name="nup_asistentes"  Value="{Binding Contrato.Asistentes}"></Controls:NumericUpDown>
-        <Controls:NumericUpDown HasDecimals="False" Margin="721,327,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Minimum="0" x:Name="nup_personalAdicional" Value="{Binding Contrato.PersonalAdicional}"/>
-        <TextBox x:Name="txt_precioTotal" HorizontalAlignment="Left" Height="25" Margin="470,564,0,0" TextWrapping="Wrap" IsEnabled="False" VerticalAlignment="Top" Width="167" Text="{Binding Contrato.PrecioTotal}"/>
-        <Label Content="Precio total:" FontWeight="Bold" HorizontalAlignment="Left" Margin="381,564,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lbl_inicio" Content="Inicio *:" HorizontalAlignment="Left" Margin="398,153,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lbl_terminoEvento" Content="Finalización *:" HorizontalAlignment="Left" Margin="624,152,0,0" VerticalAlignment="Top" Height="26" Width="86" RenderTransformOrigin="0.917,0.519"/>
+        <Label Content="Asistentes:" HorizontalAlignment="Left" Margin="377,315,0,0" VerticalAlignment="Top"/>
+        <Label Content="Personal adicional" HorizontalAlignment="Left" Margin="605,315,0,0" VerticalAlignment="Top"/>
+        <Controls:NumericUpDown HasDecimals="False" Margin="457,315,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Minimum="1" x:Name="nup_asistentes"  Value="{Binding Contrato.Asistentes}"></Controls:NumericUpDown>
+        <Controls:NumericUpDown HasDecimals="False" Margin="721,315,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Minimum="0" x:Name="nup_personalAdicional" Value="{Binding Contrato.PersonalAdicional}"/>
+        <TextBox x:Name="txt_precioTotal" HorizontalAlignment="Left" Height="25" Margin="470,514,0,0" TextWrapping="Wrap" IsEnabled="False" VerticalAlignment="Top" Width="167" Text="{Binding Contrato.PrecioTotal, StringFormat=C0}"/>
+        <Label Content="Precio total:" FontWeight="Bold" HorizontalAlignment="Left" Margin="381,514,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="txt_busquedaClienteRut" HorizontalAlignment="Left" Height="23" Margin="96,266,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="132" Text="{Binding RutBusquedaCliente, Mode=TwoWay, UpdateSourceTrigger=LostFocus}">
         </TextBox>
         <Label Content="RUT Cliente *:" HorizontalAlignment="Left" Margin="8,266,0,0" VerticalAlignment="Top"/>
@@ -125,12 +132,12 @@
         </Button>
         <TextBox x:Name="txt_nombreCliente" HorizontalAlignment="Left" Height="23" Margin="96,327,0,0" TextWrapping="Wrap" IsEnabled="False" VerticalAlignment="Top" Width="197" Text="{Binding Contrato.Cliente.RazonSocial}"/>
         <Label Content="Cliente:" HorizontalAlignment="Left" Margin="37,326,0,0" VerticalAlignment="Top"/>
-        <Label Content="Modalidad servicio*:" HorizontalAlignment="Left" Margin="327,245,0,0" VerticalAlignment="Top"/>
-        <ComboBox x:Name="cmb_modalidadServicio" HorizontalAlignment="Left" Margin="457,245,0,0" VerticalAlignment="Top" Width="218" ItemsSource="{Binding ModalidadesServicio}" SelectedItem="{Binding Contrato.ModalidadServicio}"/>
+        <Label Content="Modalidad servicio*:" HorizontalAlignment="Left" Margin="327,233,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="cmb_modalidadServicio" HorizontalAlignment="Left" Margin="457,233,0,0" VerticalAlignment="Top" Width="218" ItemsSource="{Binding ModalidadesServicio}" SelectedItem="{Binding Contrato.ModalidadServicio}"/>
 
 
-        <Label Content="Ambientación:" HorizontalAlignment="Left" Margin="364,386,0,0" VerticalAlignment="Top"/>
-        <ComboBox HorizontalAlignment="Left" Margin="459,386,0,0" VerticalAlignment="Top" Width="163"
+        <Label Content="Ambientación:" HorizontalAlignment="Left" Margin="364,356,0,0" VerticalAlignment="Top"/>
+        <ComboBox HorizontalAlignment="Left" Margin="459,356,0,0" VerticalAlignment="Top" Width="163"
                   IsEnabled="{Binding Contrato.Tipo, Converter={StaticResource ClaseTienePropiedadConverter}, ConverterParameter='Ambientacion'}"
                   ItemsSource="{Binding TiposAmbientacion}" DisplayMemberPath="Descripcion">
             <ComboBox.SelectedItem>
@@ -141,7 +148,7 @@
         </ComboBox>
         <CheckBox Content="Música ambiental"
                   IsEnabled="{Binding Contrato.Tipo, Converter={StaticResource ClaseTienePropiedadConverter}, ConverterParameter='MusicaAmbiental'}"
-                  HorizontalAlignment="Left" Margin="462,424,0,0" VerticalAlignment="Top">
+                  HorizontalAlignment="Left" Margin="462,394,0,0" VerticalAlignment="Top">
             <CheckBox.IsChecked>
                 <PriorityBinding FallbackValue="False">
                     <Binding Path="Contrato.Tipo.MusicaAmbiental"></Binding>
@@ -150,7 +157,7 @@
         </CheckBox>
         <CheckBox Content="Opción vegetariana" 
                   IsEnabled="{Binding Contrato.Tipo, Converter={StaticResource ClaseTienePropiedadConverter}, ConverterParameter='Vegetariana'}"
-                  HorizontalAlignment="Left" Margin="462,470,0,0" VerticalAlignment="Top">
+                  HorizontalAlignment="Left" Margin="462,440,0,0" VerticalAlignment="Top">
             <CheckBox.IsChecked>
                 <PriorityBinding FallbackValue="False">
                     <Binding Path="Contrato.Tipo.Vegetariana"></Binding>
@@ -159,17 +166,17 @@
         </CheckBox>
         <CheckBox Content="Música cliente"
                   IsEnabled="{Binding Contrato.Tipo, Converter={StaticResource ClaseTienePropiedadConverter}, ConverterParameter='MusicaCliente'}"
-                  HorizontalAlignment="Left" Margin="462,447,0,0" VerticalAlignment="Top">
+                  HorizontalAlignment="Left" Margin="462,417,0,0" VerticalAlignment="Top">
             <CheckBox.IsChecked>
                 <PriorityBinding FallbackValue="False">
                     <Binding Path="Contrato.Tipo.MusicaCliente"></Binding>
                 </PriorityBinding>
             </CheckBox.IsChecked>
         </CheckBox>
-        <Label Content="Local:" HorizontalAlignment="Left" Margin="676,384,0,0" VerticalAlignment="Top"/>
+        <Label Content="Local:" HorizontalAlignment="Left" Margin="676,354,0,0" VerticalAlignment="Top"/>
         <CheckBox Content="Local OnBreak"
                   IsEnabled="{Binding Contrato.Tipo, Converter={StaticResource ClaseTienePropiedadConverter}, ConverterParameter='LocalOnBreak'}"
-                  HorizontalAlignment="Left" Margin="687,421,0,0" VerticalAlignment="Top">
+                  HorizontalAlignment="Left" Margin="687,391,0,0" VerticalAlignment="Top">
             <CheckBox.IsChecked>
                 <PriorityBinding FallbackValue="False">
                     <Binding Path="Contrato.Tipo.LocalOnBreak"></Binding>
@@ -178,7 +185,7 @@
         </CheckBox>
         <CheckBox Content="Otro Local" 
                   IsEnabled="{Binding Contrato.Tipo, Converter={StaticResource ClaseTienePropiedadConverter}, ConverterParameter='OtroLocal'}"                 
-                  HorizontalAlignment="Left" Margin="688,453,0,0" VerticalAlignment="Top">
+                  HorizontalAlignment="Left" Margin="688,423,0,0" VerticalAlignment="Top">
             <CheckBox.IsChecked>
                 <PriorityBinding FallbackValue="False">
                     <Binding Path="Contrato.Tipo.OtroLocal"></Binding>
@@ -187,15 +194,15 @@
         </CheckBox>
         <TextBox x:Name="ValorArriendoTextBox"
                   IsEnabled="{Binding Contrato.Tipo, Converter={StaticResource ClaseTienePropiedadConverter}, ConverterParameter='ValorArriendo'}"                 
-            HorizontalAlignment="Left" Height="23" Margin="682,507,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120">
+            HorizontalAlignment="Left" Height="23" Margin="682,477,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120">
             <TextBox.Text>
                 <PriorityBinding FallbackValue="">
                     <Binding Path="Contrato.Tipo.ValorArriendo"></Binding>
                 </PriorityBinding>
             </TextBox.Text>
         </TextBox>
-        <Label Content="Valor arriendo:" HorizontalAlignment="Left" Margin="677,481,0,0" VerticalAlignment="Top"/>
-        <Border BorderBrush="LightGray" BorderThickness="1" HorizontalAlignment="Left" Height="76" Margin="24,676,0,0" VerticalAlignment="Top" Width="293">
+        <Label Content="Valor arriendo:" HorizontalAlignment="Left" Margin="677,451,0,0" VerticalAlignment="Top"/>
+        <Border BorderBrush="LightGray" BorderThickness="1" HorizontalAlignment="Left" Height="76" Margin="24,622,0,0" VerticalAlignment="Top" Width="293">
             <Grid>
                 <Label Content="Caché de trabajo" FontStyle="Italic" Margin="0,0,190,47"></Label>
                 <Button Content="Atrás" Margin="10,32,218,10">

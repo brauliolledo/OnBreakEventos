@@ -46,6 +46,8 @@
     <Compile Include="ResultadoValidacion.cs" />
     <Compile Include="ValidacionesContrato.cs" />
     <Compile Include="Valorizador.cs" />
+    <Compile Include="ValorizadorDecorator.cs" />
+    <Compile Include="ValorizadorTipoEventoDecorator.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\V1_Memento\Persistencia\Persistencia.csproj">

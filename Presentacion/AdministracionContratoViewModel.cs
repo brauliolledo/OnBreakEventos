@@ -28,7 +28,7 @@ namespace OnBreakEventos
 
         private ContratoEntity _contrato;
 
-        public Valorizador Valorizador = new Valorizador();
+        public ValorizadorDecorator ValorizadorDecorator;
 
         private string _rutBusquedaCliente;
 
@@ -119,10 +119,7 @@ namespace OnBreakEventos
 
                     if (value.ModalidadServicio != null)
                     {
-
-
-                        value.PrecioTotal = Valorizador.CalcularTotal((int)value.ModalidadServicio.ValorBase, value.Asistentes, value.PersonalAdicional);
-
+                        ValorizarEvento();
                     }
                 }
 
@@ -210,10 +207,29 @@ namespace OnBreakEventos
 
             TiposAmbientacion = tiposAmbientacion;
 
+            this.ValorizadorDecorator = new ValorizadorTipoEventoDecorator();
 
-            InicializarCache();
+            this.ValorizadorDecorator.SetComponent(new Valorizador());
         }
 
+
+        public void ValorizarEvento()
+        {
+            // Usamos el decorator para poder pasarle un tipo de Eventor por parametros
+
+            if(this.Contrato.Tipo == null || this.Contrato.ModalidadServicio == null)
+            {
+                this.Contrato.PrecioTotal = 0;
+                return;
+            }
+
+            this.Contrato.PrecioTotal = (ValorizadorDecorator as ValorizadorTipoEventoDecorator).CalcularTotal(
+                                                                  this.Contrato.Tipo,
+                                                                  (int)this.Contrato.ModalidadServicio.ValorBase,
+                                                                  this.Contrato.Asistentes,
+                                                                  this.Contrato.PersonalAdicional);
+
+        }
 
         private void Contrato_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
@@ -236,19 +252,40 @@ namespace OnBreakEventos
                     this.ModalidadesServicio = null;
                 }
 
-              
 
+                Contrato.Tipo.PropertyChanged += Tipo_PropertyChanged;
+                
 
             }
-            else if(e.PropertyName == "ModalidadServicio")
+
+            string[] propiedadesValorizador = new string[]
             {
-                if(Contrato.ModalidadServicio != null)
-                {
+                "TipoEvento",
+                "ModalidadServicio",
+                "PersonalAdicional",
+                "Asistentes"
+            };
 
+            if(propiedadesValorizador.Contains(e.PropertyName))
+            {
+                ValorizarEvento();
+            }
+        }
 
-                    Contrato.PrecioTotal = Valorizador.CalcularTotal((int)Contrato.ModalidadServicio.ValorBase, Contrato.Asistentes, Contrato.PersonalAdicional);
+        private void Tipo_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            string[] propiedadesValorizador = new string[]
+            {
+                "Ambientacion",
+                "MusicaAmbiental",
+                "LocalOnBreak",
+                "OtroLocal",
+                "ValorArriendo"
+            };
 
-                }
+            if (propiedadesValorizador.Contains(e.PropertyName))
+            {
+                ValorizarEvento();
             }
         }
 
@@ -562,6 +599,37 @@ namespace OnBreakEventos
                 listadoClientes.Close(); // Eliminamos la ventana auxiliar
             };
         }
+
+        #region IniciarCacheCommand
+
+        private RelayCommand _inicializarCacheCommand;
+
+        public ICommand InicializarCacheCommand
+        {
+            get
+            {
+                if (_inicializarCacheCommand == null)
+                {
+                    _inicializarCacheCommand = new RelayCommand(InicializarCacheCommandHandler, CanInicializarCache);
+                }
+
+                return _inicializarCacheCommand;
+            }
+        }
+
+        private bool CanInicializarCache(object parameters)
+        {
+            return true;
+        }
+
+
+        public void InicializarCacheCommandHandler(object parameters)
+        {
+            InicializarCache();
+        }
+
+
+        #endregion
 
         #region Cache
 
