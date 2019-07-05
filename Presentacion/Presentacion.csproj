@@ -64,7 +64,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="AdministracionClientes.xaml.cs" />
+    <Compile Include="AdministracionClientes.xaml.cs">
+      <DependentUpon>AdministracionClientes.xaml</DependentUpon>
+    </Compile>
     <Compile Include="AdministracionContratosView.xaml.cs">
       <DependentUpon>AdministracionContratosView.xaml</DependentUpon>
     </Compile>
@@ -84,8 +86,8 @@
       <DependentUpon>VentanaLogin.xaml</DependentUpon>
     </Compile>
     <Page Include="AdministracionClientes.xaml">
-      <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+      <Generator>XamlIntelliSenseFileGenerator</Generator>
     </Page>
     <Page Include="AdministracionContratosView.xaml">
       <SubType>Designer</SubType>

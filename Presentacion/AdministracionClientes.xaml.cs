@@ -314,6 +314,11 @@ namespace Presentacion
                 return false;
             }
 
+            if(String.IsNullOrEmpty(tb_razon_social.Text))
+            {
+                return false;
+            }
+
             if(String.IsNullOrEmpty(tb_direccion.Text))
             {
                 return false;
@@ -332,7 +337,7 @@ namespace Presentacion
             }
 
 
-            if (String.IsNullOrEmpty(txt_nombreContacto.Text))
+            if (String.IsNullOrEmpty(txt_emailContacto.Text))
             {
                 return false;
             }

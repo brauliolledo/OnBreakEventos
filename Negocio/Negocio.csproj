@@ -47,5 +47,11 @@
     <Compile Include="ValidacionesContrato.cs" />
     <Compile Include="Valorizador.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\V1_Memento\Persistencia\Persistencia.csproj">
+      <Project>{FCC9BFA8-0CC2-43C0-AA76-9C0472D1E222}</Project>
+      <Name>Persistencia</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

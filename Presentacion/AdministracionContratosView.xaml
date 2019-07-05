@@ -107,7 +107,8 @@
         <Controls:NumericUpDown HasDecimals="False" Margin="721,327,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Minimum="0" x:Name="nup_personalAdicional" Value="{Binding Contrato.PersonalAdicional}"/>
         <TextBox x:Name="txt_precioTotal" HorizontalAlignment="Left" Height="25" Margin="470,564,0,0" TextWrapping="Wrap" IsEnabled="False" VerticalAlignment="Top" Width="167" Text="{Binding Contrato.PrecioTotal}"/>
         <Label Content="Precio total:" FontWeight="Bold" HorizontalAlignment="Left" Margin="381,564,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="txt_busquedaClienteRut" HorizontalAlignment="Left" Height="23" Margin="96,266,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="132" Text="{Binding Contrato.Cliente.Rut}"/>
+        <TextBox x:Name="txt_busquedaClienteRut" HorizontalAlignment="Left" Height="23" Margin="96,266,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="132" Text="{Binding RutBusquedaCliente, Mode=TwoWay, UpdateSourceTrigger=LostFocus}">
+        </TextBox>
         <Label Content="RUT Cliente *:" HorizontalAlignment="Left" Margin="8,266,0,0" VerticalAlignment="Top"/>
         <Button x:Name="btn_buscarCliente" HorizontalAlignment="Left" Margin="236,266,0,0" Padding="0" VerticalAlignment="Top" Width="32" Height="26">
             <Image Source="app/Images/DataSearch.png" Height="20" Width="21" RenderOptions.BitmapScalingMode="Fant"/>

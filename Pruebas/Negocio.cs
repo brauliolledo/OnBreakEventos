@@ -12,24 +12,27 @@ namespace Pruebas
             // Fecha correcta
 
             Assert.IsTrue(
-                global::Negocio.ValidacionesContrato.Fechas(DateTime.Parse("04/07/2019"), DateTime.Parse("08/07/2019")).Exito);
+                global::Negocio.ValidacionesContrato.Fechas(DateTime.Parse("04/07/2019"), DateTime.Parse("08/07/2019"), DateTime.Now).Exito);
 
             // Fechas incorrectas
 
             Assert.IsFalse(
                 global::Negocio.ValidacionesContrato.Fechas(
                     DateTime.Parse("04/07/2019"),
-                    DateTime.Parse("02/07/2019")).Exito);
+                    DateTime.Parse("02/07/2019")
+                    , DateTime.Now).Exito);
 
             Assert.IsFalse(
                 global::Negocio.ValidacionesContrato.Fechas(
                     DateTime.Parse("04/07/2020"),
-                    DateTime.Parse("05/07/2020")).Exito);
+                    DateTime.Parse("05/07/2020"),
+                    DateTime.Now).Exito);
 
             Assert.IsFalse(
                 global::Negocio.ValidacionesContrato.Fechas(
                     DateTime.Parse("02/07/2019"),
-                    DateTime.Parse("05/07/2020")).Exito);
+                    DateTime.Parse("05/07/2020"),
+                    DateTime.Now).Exito);
         }
     }
 }

@@ -29,6 +29,66 @@ namespace OnBreakEventos
 
         public Valorizador Valorizador = new Valorizador();
 
+        private string _rutBusquedaCliente;
+
+        public string RutBusquedaCliente
+        {
+            get
+            {
+                return _rutBusquedaCliente;
+            }
+
+            set
+            {
+                if (String.IsNullOrEmpty(value))
+                {
+                    this.Contrato.Cliente = new NullClienteEntity();
+                    _rutBusquedaCliente = null;
+                    return;
+                }
+
+                if (value.Length > 9)
+                {
+                    MessageBox.Show("RUT Inválido.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    this.Contrato.Cliente = new NullClienteEntity();
+                    _rutBusquedaCliente = null;
+                    return;
+                }
+
+                // Revisamos la validez del rut. Debe ser un número
+                try
+                {
+                    int.Parse(value);
+                }
+                catch
+                {
+                    MessageBox.Show("RUT inválido. Ingréselo sin puntos ni guiones.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    this.Contrato.Cliente = new NullClienteEntity();
+                    _rutBusquedaCliente = null;
+                    return;
+                }
+
+                ClienteEntity clienteCoincidente = this.ClienteDAO.BuscarPorRut(value);
+
+
+                if (clienteCoincidente != null)
+                {
+                    this.Contrato.Cliente = clienteCoincidente;
+                }
+                else
+                {
+                    MessageBox.Show("No se encontó el cliente con el RUT especificado.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    this.Contrato.Cliente = new NullClienteEntity();
+                    _rutBusquedaCliente = null;
+                    return;
+                }
+
+                _rutBusquedaCliente = value;
+
+                NotifyPropertyChanged();
+            }
+        }
+
         public ContratoEntity Contrato
         {
             get
@@ -64,8 +124,6 @@ namespace OnBreakEventos
                 if (value != null)
                     value.PropertyChanged += Contrato_PropertyChanged;
 
-                if(value.Cliente != null)
-                    value.Cliente.PropertyChanged += Cliente_PropertyChanged;
 
 
                 NotifyPropertyChanged();
@@ -132,36 +190,22 @@ namespace OnBreakEventos
             Contrato = new NullContratoEntity();
 
             Contrato.PropertyChanged += Contrato_PropertyChanged;
-            Contrato.Cliente.PropertyChanged += Cliente_PropertyChanged;
+
+
 
             TiposEvento = TipoEventoDAO.BuscarTodo();
-            TiposAmbientacion = TipoAmbientacionDAO.ObtenerTodo();
+
+            
+
+            List<TipoAmbientacionEntity> tiposAmbientacion = TipoAmbientacionDAO.ObtenerTodo();
+
+            // Para los tipos de ambientación opcional
+
+            tiposAmbientacion.Insert(0, new NullTipoAmbientacionEntity());
+
+            TiposAmbientacion = tiposAmbientacion;
         }
 
-        private void Cliente_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            if(e.PropertyName == "Rut")
-            {
-                if (String.IsNullOrEmpty(this.Contrato.Cliente.Rut))
-                {
-                    this.Contrato.Cliente = new NullClienteEntity();
-                }
-
-                ClienteEntity clienteCoincidente = this.ClienteDAO.BuscarPorRut(this.Contrato.Cliente.Rut);
-
-                //ClienteEntity clienteCoincidente = ClienteDAO.BuscarPorRut(txt_busquedaClienteRut.Text);
-
-                if (clienteCoincidente != null)
-                {
-                    this.Contrato.Cliente = clienteCoincidente;
-                }
-                else
-                {
-                    this.Contrato.Cliente = new NullClienteEntity();
-                }
-
-            }
-        }
 
         private void Contrato_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
@@ -195,14 +239,6 @@ namespace OnBreakEventos
 
 
                     Contrato.PrecioTotal = Valorizador.CalcularTotal((int)Contrato.ModalidadServicio.ValorBase, Contrato.Asistentes, Contrato.PersonalAdicional);
-
-                }
-            }
-            else if(e.PropertyName == "Cliente")
-            {
-                if(Contrato.Cliente != null)
-                {
-                    Contrato.Cliente.PropertyChanged += Cliente_PropertyChanged;
 
                 }
             }
@@ -322,12 +358,21 @@ namespace OnBreakEventos
 
         private bool CanGuardarContrato(object parameters)
         {
-            ResultadoValidacion resultadoValidacion =
-                ValidacionesContrato.Fechas(this.Contrato.InicioEvento, this.Contrato.TerminoEvento);
+            ResultadoValidacion resultadoValidacionCampos =
+                ValidacionesContrato.CamposObligatorios(this.Contrato);
 
-            if(resultadoValidacion.Exito == false)
+            if(resultadoValidacionCampos.Exito == false)
             {
-                MessageBox.Show(resultadoValidacion.MensajeError, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(resultadoValidacionCampos.MensajeError, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+
+            ResultadoValidacion resultadoValidacionFechas =
+                ValidacionesContrato.Fechas(this.Contrato.InicioEvento, this.Contrato.TerminoEvento, this.Contrato.Creacion);
+
+            if(resultadoValidacionFechas.Exito == false)
+            {
+                MessageBox.Show(resultadoValidacionFechas.MensajeError, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
 
@@ -390,9 +435,16 @@ namespace OnBreakEventos
 
         public void TerminarContratoCommandHandler(object parameters)
         {
-            this.Contrato.Termino = DateTime.Now;
+            MessageBoxResult messageBoxResult = MessageBox.Show("Esta acción no puede ser revertida. ¿Desea terminar el contrato?", "Información", MessageBoxButton.YesNo, MessageBoxImage.Warning);
 
-            MessageBox.Show("Asignada fecha de término de contrato. Debe guardar los cambios para confirmar la acción", "Acción");
+            if(messageBoxResult == MessageBoxResult.Yes)
+            {
+                this.Contrato.Termino = DateTime.Now;
+
+                MessageBox.Show("Asignada fecha de término de contrato. Debe guardar los cambios para completar la operación.", "Acción");
+
+            }
+
 
         }
 
@@ -441,6 +493,17 @@ namespace OnBreakEventos
 
                 this.Contrato = args.Contrato;
 
+                if (args.Contrato.Cliente == null)
+                {
+                    this.Contrato.Cliente = new NullClienteEntity();
+                    this.RutBusquedaCliente = null;
+                }
+                else
+                {
+                    this.Contrato.Cliente = args.Contrato.Cliente;
+                    this.RutBusquedaCliente = args.Contrato.Cliente.Rut;
+                }
+
                 listadoAuxiliar.Close();
             };
         }
@@ -480,10 +543,12 @@ namespace OnBreakEventos
                 if(args.Cliente == null)
                 {
                     this.Contrato.Cliente =  new NullClienteEntity();
+                    this.RutBusquedaCliente = null;
                 }
                 else
                 {
                     this.Contrato.Cliente = args.Cliente;
+                    this.RutBusquedaCliente = args.Cliente.Rut;
                 }
 
                 listadoClientes.Close(); // Eliminamos la ventana auxiliar
