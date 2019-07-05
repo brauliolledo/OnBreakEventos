@@ -107,7 +107,7 @@
         <Label x:Name="lbl_terminoEvento" Content="Finalización *:" HorizontalAlignment="Left" Margin="624,164,0,0" VerticalAlignment="Top" Height="26" Width="86" RenderTransformOrigin="0.917,0.519"/>
         <Label Content="Asistentes:" HorizontalAlignment="Left" Margin="377,327,0,0" VerticalAlignment="Top"/>
         <Label Content="Personal adicional" HorizontalAlignment="Left" Margin="605,327,0,0" VerticalAlignment="Top"/>
-        <Controls:NumericUpDown HasDecimals="False" Margin="457,327,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Minimum="0" x:Name="nup_asistentes"  Value="{Binding Contrato.Asistentes}"></Controls:NumericUpDown>
+        <Controls:NumericUpDown HasDecimals="False" Margin="457,327,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Minimum="1" x:Name="nup_asistentes"  Value="{Binding Contrato.Asistentes}"></Controls:NumericUpDown>
         <Controls:NumericUpDown HasDecimals="False" Margin="721,327,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Minimum="0" x:Name="nup_personalAdicional" Value="{Binding Contrato.PersonalAdicional}"/>
         <TextBox x:Name="txt_precioTotal" HorizontalAlignment="Left" Height="25" Margin="470,564,0,0" TextWrapping="Wrap" IsEnabled="False" VerticalAlignment="Top" Width="167" Text="{Binding Contrato.PrecioTotal}"/>
         <Label Content="Precio total:" FontWeight="Bold" HorizontalAlignment="Left" Margin="381,564,0,0" VerticalAlignment="Top"/>
