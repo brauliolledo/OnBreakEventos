@@ -28,16 +28,9 @@ namespace OnBreakEventos
     /// </summary>
     public partial class AdministracionContratosView : MetroWindow
     {
-
-        public AdministracionContratosView(ContratoDAO contratoDAO,  ClienteDAO clienteDAO, TipoEventoDAO tipoEventoDAO, ModalidadServicioDAO modalidadServicioDAO)
+        public AdministracionContratosView()
         {
-
             InitializeComponent();
         }
-
-
-      
-
-
     }
 }

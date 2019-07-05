@@ -109,7 +109,7 @@ namespace Presentacion
         /// <param name="e"></param>
         private void Btn_contratos_Click(object sender, RoutedEventArgs e)
         {
-            AdministracionContratosView administracionContratos = new AdministracionContratosView(contratoDAO, clienteDAO, tipoEventoDAO, modalidadServicioDAO);
+            AdministracionContratosView administracionContratos = new AdministracionContratosView();
 
             administracionContratos.Show();
         }
@@ -129,7 +129,16 @@ namespace Presentacion
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            ThemeManager.ChangeAppTheme(Application.Current, "BaseDark");
+
+
+            if(ThemeManager.DetectAppStyle().Item1.Name == "BaseLight")
+            {
+                ThemeManager.ChangeAppTheme(Application.Current, "BaseDark");
+            }
+            else
+            {
+                ThemeManager.ChangeAppTheme(Application.Current, "BaseLight");
+            }
         }
     }
 }
