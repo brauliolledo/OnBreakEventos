@@ -67,6 +67,8 @@
     <Compile Include="AdministracionClientes.xaml.cs" />
     <Compile Include="AdministracionContratosView.xaml.cs" />
     <Compile Include="AdministracionContratoViewModel.cs" />
+    <Compile Include="app\converters\BooleanAVisibilidadConverter.cs" />
+    <Compile Include="app\converters\ClaseTienePropiedadConverter.cs" />
     <Compile Include="app\converters\IsSqlMinDateConverter.cs" />
     <Compile Include="app\converters\SqlMinDateToNullConverter.cs" />
     <Compile Include="ListadoAuxiliarDecorator.cs" />

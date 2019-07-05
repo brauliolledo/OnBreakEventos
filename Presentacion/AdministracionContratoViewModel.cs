@@ -165,6 +165,8 @@ namespace OnBreakEventos
                     this.ModalidadesServicio = null;
                 }
 
+              
+
 
             }
             else if(e.PropertyName == "ModalidadServicio")
