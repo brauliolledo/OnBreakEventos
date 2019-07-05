@@ -1,0 +1,78 @@
+﻿<Controls:MetroWindow x:Class="Presentacion.AdministracionClientes"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"    
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:converters="clr-namespace:OnBreakEventos.app.converters"
+
+        xmlns:local="clr-namespace:OnBreakEventos"
+        mc:Ignorable="d"
+        Title="OnBreak - Administracion de Clientes"  Height="656.129" Width="897" Icon="app/Images/Icono.ico" >
+    <Window.Resources>
+        <converters:SqlMinDateToNullConverter x:Key="SqlMinDateConverter" />
+    </Window.Resources>
+    
+    <Grid>
+
+        <Image Source="app/Images/logo_white_background.jpg"  HorizontalAlignment="Right" VerticalAlignment="Top" Height="224" Margin="0,-50,-25,0" Width="195" RenderOptions.BitmapScalingMode="Fant">
+            <Image.Clip>
+                <RectangleGeometry  Rect="10,50 160,200"></RectangleGeometry>
+            </Image.Clip>
+        </Image>
+        <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Administración de clientes" VerticalAlignment="Top" FontSize="24" Height="72" Width="293"/>
+        <TextBlock HorizontalAlignment="Left" Margin="13,48,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="34" Width="307" FontStyle="Italic" Foreground="#FF767676"><Run Text="Ingrese "/><Run Text="los datos para crear un nuevo cliente, o indique "/><Run Text="el RUT de un cliente existen"/><Run Text="te para modificarlo"/></TextBlock>
+        <Label x:Name="lbl_rut" Content="RUT *" HorizontalAlignment="Left" Margin="13,107,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.562,1.231"/>
+        <TextBox x:Name="tb_rut" HorizontalAlignment="Left" Height="10" Margin="50,108,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="97"/>
+        <Button x:Name="btn_buscarPorRutIngreso" HorizontalAlignment="Left" Margin="152,108,0,0" Padding="0" VerticalAlignment="Top" Width="32" Height="26" Click="Btn_buscar_Click">
+            <Image Source="app/Images/ClientSearch.png" Height="20" Width="21" RenderOptions.BitmapScalingMode="Fant"></Image>
+        </Button>
+
+        <Button x:Name="btn_buscarPorRutLista" HorizontalAlignment="Left" Margin="201,108,0,0" Padding="0" VerticalAlignment="Top" Width="32" Height="26" Click="Btn_buscarPorRutLista_Click">
+            <Image Source="app/Images/DataSearch.png" Height="20" Width="21" RenderOptions.BitmapScalingMode="Fant"></Image>
+        </Button>
+
+        <Label Content="Razón social *:" x:Name="lbl_razonSocial" Margin="13,155,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"></Label>
+        <TextBox x:Name="tb_razon_social" HorizontalAlignment="Left" Height="27" Margin="99,153,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="255"/>
+        <Label Content="Dirección *:" x:Name="lbl_direccion" Margin="26,197,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <TextBox x:Name="tb_direccion" HorizontalAlignment="Left" Height="27" Margin="99,197,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="255" RenderTransformOrigin="0.5,0.5">
+        </TextBox>
+        <Label Content="Teléfono *:" x:Name="lbl_telefono" Margin="26,238,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <TextBox x:Name="tb_telefono" HorizontalAlignment="Left" Height="27" Margin="98,238,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="119" RenderTransformOrigin="0.5,0.5">
+
+        </TextBox>
+        <Label Content="Actividad *:" x:Name="lbl_actividad" Margin="26,284,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <ComboBox x:Name="cmb_actividad" HorizontalAlignment="Left" Margin="99,285,0,0" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Tipo *:" x:Name="lbl_tipo" Margin="50,331,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <ComboBox x:Name="cmb_tipo" HorizontalAlignment="Left" Margin="97,332,0,0" VerticalAlignment="Top" Width="120"/>
+
+        <Button x:Name="btn_agregarCliente" HorizontalAlignment="Left" Margin="336,528,0,0" Padding="0" VerticalAlignment="Top" Width="60" Height="60" Click="Btn_agregar_Click">
+            <Image Source="app/Images/ClientAdd.png" Height="50" Width="50" RenderOptions.BitmapScalingMode="Fant"></Image>
+        </Button>
+
+        <Button x:Name="btn_eliminarCliente" HorizontalAlignment="Left" Margin="32,528,0,0" Padding="0" VerticalAlignment="Top" Width="60" Height="60" Click="Btn_eliminar_Click">
+            <Image Source="app/Images/ClientDelete.png" Height="50" Width="50" RenderOptions.BitmapScalingMode="Fant"></Image>
+        </Button>
+
+        <Button x:Name="btn_modificarCliente" HorizontalAlignment="Left" Margin="120,528,0,0" Padding="0" VerticalAlignment="Top" Width="60" Height="60" Click="Btn_modificar_Click">
+            <Image Source="app/Images/ClientUpdate.png" Height="50" Width="50" RenderOptions.BitmapScalingMode="Fant"></Image>
+        </Button>
+        <DataGrid x:Name="dg_contratos" IsReadOnly="True" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="202" Margin="416,153,0,0" VerticalAlignment="Top" Width="463">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Path=NumeroContrato}" Header="Número de contrato"></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=Tipo.Descripcion}" Header="Tipo"></DataGridTextColumn>
+                <DataGridCheckBoxColumn Binding="{Binding Path=EstaVigente, Mode=OneWay}" Header="Vigente"></DataGridCheckBoxColumn>
+                <DataGridTextColumn Binding="{Binding Path=Creacion, StringFormat='dd/MM/yyyy'}" Header="Fecha de creación"></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=Termino, StringFormat='dd/MM/yyyy', Converter={StaticResource SqlMinDateConverter}}" Header="Fecha de término"></DataGridTextColumn>
+            </DataGrid.Columns>
+
+        </DataGrid>
+        <TextBlock HorizontalAlignment="Left" Margin="21,391,0,0" TextWrapping="Wrap" Text="Contacto" VerticalAlignment="Top" FontSize="14" FontWeight="Bold"/>
+        <Label Content="Nombre *:" x:Name="lbl_nombreContacto" Margin="26,427,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <TextBox x:Name="txt_nombreContacto" HorizontalAlignment="Left" Height="23" Margin="102,428,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="218"/>
+
+        <Label Content="E-mail *:" x:Name="lbl_emailContacto" Margin="26,471,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <TextBox x:Name="txt_emailContacto" HorizontalAlignment="Left" Height="23" Margin="102,472,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="231"/>
+
+    </Grid>
+</Controls:MetroWindow>

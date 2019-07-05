@@ -1,0 +1,8 @@
+.vs/
+packages/
+Persistencia/bin/
+Presentacion/bin/
+Persistencia/obj/
+Presentacion/obj/
+Negocio/bin/
+Negocio/obj/

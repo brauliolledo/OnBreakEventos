@@ -1,0 +1,50 @@
+﻿<Controls:MetroWindow x:Class="Presentacion.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Presentacion"
+        mc:Ignorable="d"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"        
+        Title="OnBreak Eventos" Height="392.667" Width="525" Icon="app/Images/Icono.ico">
+    <Grid>
+        <Image Source="app/Images/logo_transparent_background.png"  HorizontalAlignment="Right" VerticalAlignment="Top" Height="224" Margin="0,-50,-25,0" Width="195" RenderOptions.BitmapScalingMode="Fant">
+            <Image.Clip>
+                <RectangleGeometry  Rect="10,50 160,200"></RectangleGeometry>
+            </Image.Clip>
+        </Image>
+
+        <Button x:Name="btn_aniadir" HorizontalAlignment="Left"
+                Margin="69,175,0,0" VerticalAlignment="Top" Width="84" Height="84" Click="Btn_aniadir_Click">
+            <Image Source="app/Images/Clientes.png" RenderOptions.BitmapScalingMode="Fant"/>
+
+        </Button>
+
+
+        <Label x:Name="lbl_clientes" Content="Clientes" HorizontalAlignment="Left" Margin="64,136,0,0" VerticalAlignment="Top" FontSize="18"/>
+        <Button x:Name="btn_contratos" HorizontalAlignment="Left"
+            Margin="279,178,0,0" VerticalAlignment="Top" Width="99" Height="85" Click="Btn_contratos_Click">
+            <Image Source="app/Images/Contratos.png" RenderOptions.BitmapScalingMode="Fant"/>
+
+        </Button>
+        <Label Content="Contratos" Margin="279,141,148,141" FontSize="18"/>
+        <TextBlock HorizontalAlignment="Left" Margin="47,28,0,0" TextWrapping="Wrap" Text="Bienvenido al software de gestión OnBreak. Seleccione un módulo." VerticalAlignment="Top" Height="130" Width="227" FontSize="22"/>
+        <Button x:Name="btn_listarClientes" HorizontalAlignment="Left"
+            Margin="158,175,0,0" VerticalAlignment="Top" Width="60" Height="84" Click="Btn_listarClientes_Click">
+            <Image Source="app/Images/Clientes.png" RenderOptions.BitmapScalingMode="Fant"/>
+
+        </Button>
+        <Button x:Name="btn_listarContratos" HorizontalAlignment="Left"
+            Margin="383,179,0,0" VerticalAlignment="Top" Width="52" Height="84" Click="Btn_listarContratos_Click">
+            <Image Source="app/Images/Contratos.png" RenderOptions.BitmapScalingMode="Fant"/>
+
+        </Button>
+        <Label x:Name="lbl_listarClientes" Content="Listar" HorizontalAlignment="Left" Margin="168,259,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lbl_administrarClientes" Content="Administrar" HorizontalAlignment="Left" Margin="69,259,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lbl_listarContratos" Content="Listar" HorizontalAlignment="Left" Margin="388,259,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lbl_administrarContratos" Content="Administrar" HorizontalAlignment="Left" Margin="289,259,0,0" VerticalAlignment="Top"/>
+        <Button ToolTip="Opción de accesibilidad: activa el modo de alto contraste" Content="Alto Contraste" HorizontalAlignment="Left" Margin="10,322,0,0" VerticalAlignment="Top" Width="106" Click="Button_Click"/>
+
+
+    </Grid>
+</Controls:MetroWindow>

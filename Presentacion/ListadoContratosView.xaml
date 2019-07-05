@@ -1,0 +1,68 @@
+﻿<Controls:MetroWindow x:Class="OnBreakEventos.ListadoContratosView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:converters="clr-namespace:OnBreakEventos.app.converters"
+        xmlns:ie="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:local="clr-namespace:OnBreakEventos"
+        mc:Ignorable="d"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"    
+        Title="OnBreak - Listado Contratos" Height="639.407" Width="872.211" Icon="app/Images/Icono.ico">
+    <Window.Resources>
+        <converters:SqlMinDateToNullConverter x:Key="SqlMinDateConverter" />
+    </Window.Resources>
+    <Window.DataContext>
+        <local:ListadoContratosViewModel></local:ListadoContratosViewModel>
+    </Window.DataContext>
+    <Grid Height="Auto">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="130"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Image Source="app/Images/logo_transparent_background.png"  RenderOptions.BitmapScalingMode="Fant" HorizontalAlignment="Right" VerticalAlignment="Top" Height="224" Margin="0,-50,-25,0" Width="195" >
+            <Image.Clip>
+                <RectangleGeometry  Rect="10,50 160,200"></RectangleGeometry>
+            </Image.Clip>
+        </Image>
+        <TextBlock Grid.Row="0" HorizontalAlignment="Left" Margin="23,17,0,0" TextWrapping="Wrap" Text="Listado de contratos" VerticalAlignment="Top" FontSize="24" Width="307"/>
+        <TextBlock Grid.Row="0" HorizontalAlignment="Left" Margin="23,49,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="34" Width="594" FontStyle="Italic" Foreground="#FF767676">Vista en detalle de los contratos registrados. Use los controles en la esquina inferior derecha para los filtros. Haga doble clic en un contrato para ver más detalles.</TextBlock>
+
+        <DataGrid ItemsSource="{Binding Path=ContratosCollection}" Grid.Row="1" x:Name="dg_contratos" HorizontalAlignment="Stretch" Margin="5,5,0,5" VerticalAlignment="Stretch" Width="796" AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Path=Cliente.RazonSocial}" Header="Cliente"></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=NumeroContrato}" Header="Número de contrato"></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=Tipo.Descripcion}" Header="Tipo"></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=ModalidadServicio.Nombre}" Header="Modalidad"></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=Creacion, StringFormat='dd/MM/yyyy'}" Header="Fecha de creación"></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=Termino, StringFormat='dd/MM/yyyy', Converter={StaticResource SqlMinDateConverter}}" Header="Fecha de término"></DataGridTextColumn>
+                <DataGridCheckBoxColumn Binding="{Binding Path=EstaVigente, Mode=OneWay}" Header="Vigente"></DataGridCheckBoxColumn>
+                <DataGridTextColumn Binding="{Binding Path=InicioEvento, StringFormat='dd/MM/yyyy hh:mm'}" Header="Inicio evento"></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=TerminoEvento, StringFormat='dd/MM/yyyy hh:mm'}" Header="Término evento"></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Label  Grid.Row="2" x:Name="lbl_filtro" Content="Filtrar por:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="495,10,0,0"/>
+        <ComboBox x:Name="cmb_tipoFiltro" SelectedIndex="{Binding Path=TipoFiltro}" Grid.Row="2" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="120" Margin="576,10,0,0">
+
+            <ComboBoxItem Content="Sin filtro" HorizontalAlignment="Left" Width="118"/>
+            <ComboBoxItem Content="Número de contrato" HorizontalAlignment="Left" Width="118"/>
+            <ComboBoxItem Content="Rut del cliente" HorizontalAlignment="Left" Width="118"/>
+            <ComboBoxItem Content="Tipo de evento" HorizontalAlignment="Left" Width="118"/>
+            <ComboBoxItem Content="Modalidad Servicio" HorizontalAlignment="Left" Width="118"/>
+        </ComboBox>
+        <TextBox x:Name="txt_filtro" Text="{Binding Path=Filtro, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="2"  HorizontalAlignment="Left" Height="23"  TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="724,10,0,0"/>
+        <Button Grid.Row="2" x:Name="btn_refrescarContratos" HorizontalAlignment="Left" ToolTip="Refrescar"
+     VerticalAlignment="Top" Width="42" Height="44" Margin="23,10,0,0">
+            <Image Source="app/Images/refresh-page-option.png" RenderOptions.BitmapScalingMode="Fant" Height="27" Width="27"/>
+            <ie:Interaction.Triggers>
+                <ie:EventTrigger EventName="Click">
+                    <ie:InvokeCommandAction Command="{Binding RefrescarContratosCommand}"/>
+                </ie:EventTrigger>
+            </ie:Interaction.Triggers>
+        </Button>
+        <Button x:Name="btn_seleccionar" Content="SELECCIONAR" Visibility="Hidden" HorizontalAlignment="Left" Margin="722,58,0,0" Grid.Row="2" VerticalAlignment="Top" Width="124" Height="56" RenderTransformOrigin="0.577,0.125"/>
+
+        
+    </Grid>
+</Controls:MetroWindow>
