@@ -72,7 +72,7 @@
 
 
         <Button x:Name="btn_crear" HorizontalAlignment="Left"
-                Margin="24,658,0,0" VerticalAlignment="Top" Width="68" Height="66">
+                Margin="29,574,0,0" VerticalAlignment="Top" Width="68" Height="66">
             <Image Source="app/Images/ContractAdd.png" ToolTip="Nuevo contrato" RenderOptions.BitmapScalingMode="Fant"/>
             <ie:Interaction.Triggers>
                 <ie:EventTrigger EventName="Click">
@@ -81,7 +81,7 @@
             </ie:Interaction.Triggers>
         </Button>
         <Button x:Name="btn_guardarCambios" HorizontalAlignment="Left"
-            Margin="772,672,0,0" VerticalAlignment="Top" Width="68" Height="66" >
+            Margin="789,686,0,0" VerticalAlignment="Top" Width="68" Height="66" >
             <Image Source="app/Images/ContractUpdate.png" ToolTip="
                    cambios" RenderOptions.BitmapScalingMode="Fant"/>
 
@@ -93,7 +93,7 @@
         </Button>
 
         <Button x:Name="btn_terminarContrato" HorizontalAlignment="Left"
-            Margin="664,672,0,0" VerticalAlignment="Top" Width="68" Height="66"  ToolTip="Terminar contrato">
+            Margin="665,686,0,0" VerticalAlignment="Top" Width="68" Height="66"  ToolTip="Terminar contrato">
             <Image Source="app/Images/ContractDelete.png" RenderOptions.BitmapScalingMode="Fant"/>
             <ie:Interaction.Triggers>
                 <ie:EventTrigger EventName="Click">
@@ -195,6 +195,36 @@
             </TextBox.Text>
         </TextBox>
         <Label Content="Valor arriendo:" HorizontalAlignment="Left" Margin="677,481,0,0" VerticalAlignment="Top"/>
+        <Border BorderBrush="LightGray" BorderThickness="1" HorizontalAlignment="Left" Height="76" Margin="24,676,0,0" VerticalAlignment="Top" Width="293">
+            <Grid>
+                <Label Content="Caché de trabajo" FontStyle="Italic" Margin="0,0,190,47"></Label>
+                <Button Content="Atrás" Margin="10,32,218,10">
+                    <ie:Interaction.Triggers>
+                        <ie:EventTrigger EventName="Click">
+                            <ie:InvokeCommandAction Command="{Binding MementoAnteriorCommand}"/>
+                        </ie:EventTrigger>
+                    </ie:Interaction.Triggers>
+                </Button>
+                <TextBlock HorizontalAlignment="Left" Margin="118,6,0,0" TextWrapping="Wrap" Text="{Binding MementoActual.FechaHora, TargetNullValue='Actual', StringFormat=G}" VerticalAlignment="Top" Width="163" TextAlignment="Right"/>
+                <Button Content="Respaldar" HorizontalAlignment="Left" Margin="86,32,0,0" VerticalAlignment="Top" Width="110" Height="32">
+                    <ie:Interaction.Triggers>
+                        <ie:EventTrigger EventName="Click">
+                            <ie:InvokeCommandAction Command="{Binding RespaldarMementoCommand}"/>
+                        </ie:EventTrigger>
+                    </ie:Interaction.Triggers>
+                </Button>
+                <Button Content="Adelante" HorizontalAlignment="Left" Margin="204,32,0,0" VerticalAlignment="Top" Width="77" Height="32">
+                    <ie:Interaction.Triggers>
+                        <ie:EventTrigger EventName="Click">
+                            <ie:InvokeCommandAction Command="{Binding MementoSiguienteCommand}"/>
+                        </ie:EventTrigger>
+                    </ie:Interaction.Triggers>
+                </Button>
+
+            </Grid>
+
+
+        </Border>
 
     </Grid>
 </Controls:MetroWindow>

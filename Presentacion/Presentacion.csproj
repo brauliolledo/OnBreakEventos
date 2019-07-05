@@ -71,6 +71,7 @@
       <DependentUpon>AdministracionContratosView.xaml</DependentUpon>
     </Compile>
     <Compile Include="AdministracionContratoViewModel.cs" />
+    <Compile Include="app\cache\caretaker\AdministracionContratoCaretaker.cs" />
     <Compile Include="app\converters\BooleanAVisibilidadConverter.cs" />
     <Compile Include="app\converters\ClaseTienePropiedadConverter.cs" />
     <Compile Include="app\converters\IsSqlMinDateConverter.cs" />

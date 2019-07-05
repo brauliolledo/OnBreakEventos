@@ -1,4 +1,5 @@
 ﻿using Negocio;
+using Persistencia.lib.caretaker;
 using Persistencia.lib.dao;
 using Persistencia.lib.entity;
 using Presentacion.app.lib;
@@ -8,10 +9,10 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
+using System.Timers;
 using System.Windows;
 using System.Windows.Input;
+using Persitencia.lib.memento;
 
 namespace OnBreakEventos
 {
@@ -44,6 +45,7 @@ namespace OnBreakEventos
                 {
                     this.Contrato.Cliente = new NullClienteEntity();
                     _rutBusquedaCliente = null;
+                    NotifyPropertyChanged();
                     return;
                 }
 
@@ -52,6 +54,7 @@ namespace OnBreakEventos
                     MessageBox.Show("RUT Inválido.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     this.Contrato.Cliente = new NullClienteEntity();
                     _rutBusquedaCliente = null;
+                    NotifyPropertyChanged();
                     return;
                 }
 
@@ -65,6 +68,7 @@ namespace OnBreakEventos
                     MessageBox.Show("RUT inválido. Ingréselo sin puntos ni guiones.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     this.Contrato.Cliente = new NullClienteEntity();
                     _rutBusquedaCliente = null;
+                    NotifyPropertyChanged();
                     return;
                 }
 
@@ -80,6 +84,7 @@ namespace OnBreakEventos
                     MessageBox.Show("No se encontó el cliente con el RUT especificado.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     this.Contrato.Cliente = new NullClienteEntity();
                     _rutBusquedaCliente = null;
+                    NotifyPropertyChanged();
                     return;
                 }
 
@@ -204,6 +209,9 @@ namespace OnBreakEventos
             tiposAmbientacion.Insert(0, new NullTipoAmbientacionEntity());
 
             TiposAmbientacion = tiposAmbientacion;
+
+
+            InicializarCache();
         }
 
 
@@ -554,6 +562,286 @@ namespace OnBreakEventos
                 listadoClientes.Close(); // Eliminamos la ventana auxiliar
             };
         }
+
+        #region Cache
+
+        public AdministracionContratoCaretaker Caretaker = new AdministracionContratoCaretaker();
+        private Timer CrearMementoTimer;
+
+        private AdministracionContratoMemento _mementoActual;
+        public AdministracionContratoMemento MementoActual
+        {
+            get
+            {
+                return _mementoActual;
+            }
+
+            set
+            {
+                _mementoActual = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        public const int IntervaloMemento = 10000;
+
+        public void InicializarCache()
+        {
+            CrearMementoTimer = new Timer(IntervaloMemento);
+
+            CrearMementoTimer.Elapsed += CrearMementoTimer_Elapsed;
+
+            MementoActual = new NullAdministracionContratoMemento();
+        }
+
+        private void CrearMementoTimer_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            AlmacenarEstadoEnCache();
+        }
+
+        public void AlmacenarEstadoEnCache()
+        {
+            AdministracionContratoMemento nuevoMemento = CrearMemento();
+
+            Caretaker.Mementos.Add(nuevoMemento);
+            MementoActual = nuevoMemento;
+        }
+
+        public AdministracionContratoMemento CrearMemento()
+        {
+            ContratoEntity contrato;
+
+            if(this.Contrato is NullContratoEntity)
+            {
+                contrato = new NullContratoEntity()
+                {
+                    Asistentes = this.Contrato.Asistentes,
+                    Cliente = this.Contrato.Cliente,
+                    Tipo = this.Contrato.Tipo,
+                    Creacion = this.Contrato.Creacion,
+                    InicioEvento = this.Contrato.InicioEvento,
+                    ModalidadServicio = this.Contrato.ModalidadServicio,
+                    NumeroContrato = this.Contrato.NumeroContrato,
+                    Observaciones = this.Contrato.Observaciones,
+                    PersonalAdicional = this.Contrato.PersonalAdicional,
+                    PrecioTotal = this.Contrato.PrecioTotal,
+                    Realizado = this.Contrato.Realizado,
+                    Termino = this.Contrato.Termino,
+                    TerminoEvento = this.Contrato.TerminoEvento
+                    
+                };
+            }
+            else
+            {
+                contrato = new ContratoEntity()
+                {
+                    Asistentes = this.Contrato.Asistentes,
+                    Cliente = this.Contrato.Cliente,
+                    Tipo = this.Contrato.Tipo,
+                    Creacion = this.Contrato.Creacion,
+                    InicioEvento = this.Contrato.InicioEvento,
+                    ModalidadServicio = this.Contrato.ModalidadServicio,
+                    NumeroContrato = this.Contrato.NumeroContrato,
+                    Observaciones = this.Contrato.Observaciones,
+                    PersonalAdicional = this.Contrato.PersonalAdicional,
+                    PrecioTotal = this.Contrato.PrecioTotal,
+                    Realizado = this.Contrato.Realizado,
+                    Termino = this.Contrato.Termino,
+                    TerminoEvento = this.Contrato.TerminoEvento
+
+                };
+            
+            }
+
+            return new AdministracionContratoMemento()
+            {
+                FechaHora = DateTime.Now,
+                Contrato = contrato
+            };
+        }
+
+        public void RestaurarMemento(AdministracionContratoMemento memento)
+        {
+            if (memento.Contrato == null)
+            {
+                this.Contrato = new NullContratoEntity();
+            }
+
+            MementoActual = memento;
+
+            if (this.Contrato is NullContratoEntity)
+            {
+                this.Contrato = new NullContratoEntity()
+                {
+                    Asistentes = memento.Contrato.Asistentes,
+                    Cliente = memento.Contrato.Cliente ?? new NullClienteEntity(),
+                    Tipo = memento.Contrato.Tipo,
+                    Creacion = memento.Contrato.Creacion,
+                    InicioEvento = memento.Contrato.InicioEvento,
+                    ModalidadServicio = memento.Contrato.ModalidadServicio,
+                    NumeroContrato = memento.Contrato.NumeroContrato,
+                    Observaciones = memento.Contrato.Observaciones,
+                    PersonalAdicional = memento.Contrato.PersonalAdicional,
+                    PrecioTotal = memento.Contrato.PrecioTotal,
+                    Realizado = memento.Contrato.Realizado,
+                    Termino = memento.Contrato.Termino,
+                    TerminoEvento = memento.Contrato.TerminoEvento
+
+                };
+            }
+            else
+            {
+                this.Contrato = new ContratoEntity()
+                {
+                    Asistentes = memento.Contrato.Asistentes,
+                    Cliente = memento.Contrato.Cliente ?? new NullClienteEntity(),
+                    Tipo = memento.Contrato.Tipo,
+                    Creacion = memento.Contrato.Creacion,
+                    InicioEvento = memento.Contrato.InicioEvento,
+                    ModalidadServicio = memento.Contrato.ModalidadServicio,
+                    NumeroContrato = memento.Contrato.NumeroContrato,
+                    Observaciones = memento.Contrato.Observaciones,
+                    PersonalAdicional = memento.Contrato.PersonalAdicional,
+                    PrecioTotal = memento.Contrato.PrecioTotal,
+                    Realizado = memento.Contrato.Realizado,
+                    Termino = memento.Contrato.Termino,
+                    TerminoEvento = memento.Contrato.TerminoEvento
+
+                };
+
+            }
+
+            if (memento.Contrato.Cliente is NullClienteEntity)
+            {
+                this.RutBusquedaCliente = null;
+            }
+            else
+            {
+                this.Contrato.Cliente = memento.Contrato.Cliente;
+                this.RutBusquedaCliente = memento.Contrato.Cliente.Rut;
+            }
+        }
+
+        #region Comandos Memento
+
+        #region RespaldarMementoCommand
+        private RelayCommand _respaldarMementoCommand;
+
+        public ICommand RespaldarMementoCommand
+        {
+            get
+            {
+                if (_respaldarMementoCommand == null)
+                {
+                    _respaldarMementoCommand = new RelayCommand(RespaldarMementoCommandHandler, CanRespaldarMemento);
+                }
+
+                return _respaldarMementoCommand;
+            }
+        }
+
+        private bool CanRespaldarMemento(object parameters)
+        {
+            return true;
+        }
+
+
+        public void RespaldarMementoCommandHandler(object parameters)
+        {
+            AlmacenarEstadoEnCache();
+            Caretaker.PersistirMementos();
+        }
+
+        #endregion
+
+        #region MementoAnteriorCommand
+
+
+        private RelayCommand _mementoAnteriorCommand;
+
+        public ICommand MementoAnteriorCommand
+        {
+            get
+            {
+                if (_mementoAnteriorCommand == null)
+                {
+                    _mementoAnteriorCommand = new RelayCommand(MementoAnteriorCommandHandler, CanMementoAnterior);
+                }
+
+                return _mementoAnteriorCommand;
+            }
+        }
+
+        private bool CanMementoAnterior(object parameters)
+        {
+            return true;
+        }
+
+
+        public void MementoAnteriorCommandHandler(object parameters)
+        {
+            if(Caretaker.Mementos.Count == 0)
+            {
+                return;
+            }
+
+            int indice = (Caretaker.Mementos.Count == 1 || Caretaker.Mementos.IndexOf(MementoActual) == 0) ? 
+                                0 : 
+                                Caretaker.Mementos.IndexOf(MementoActual) - 1;
+
+            if(indice < 0)
+            {
+                return;
+            }
+
+            RestaurarMemento(Caretaker.Mementos.ElementAt(indice));
+            
+        }
+        #endregion
+
+        #region MementoSiguienteCommand
+
+
+        private RelayCommand _mementoSiguienteCommand;
+
+        public ICommand MementoSiguienteCommand
+        {
+            get
+            {
+                if (_mementoSiguienteCommand == null)
+                {
+                    _mementoSiguienteCommand = new RelayCommand(MementoSiguienteCommandHandler, CanMementoSiguiente);
+                }
+
+                return _mementoSiguienteCommand;
+            }
+        }
+
+        private bool CanMementoSiguiente(object parameters)
+        {
+            return true;
+        }
+
+
+        public void MementoSiguienteCommandHandler(object parameters)
+        {
+            if (Caretaker.Mementos.Count == 0)
+            {
+                return;
+            }
+
+            int indice = (Caretaker.Mementos.IndexOf(MementoActual) + 1 == Caretaker.Mementos.Count ) ? Caretaker.Mementos.Count - 1 : Caretaker.Mementos.IndexOf(MementoActual) + 1;
+
+            RestaurarMemento(Caretaker.Mementos.ElementAt(indice));
+
+        }
+        #endregion
+
+        #endregion
+
+        #endregion
+
+
 
         public event PropertyChangedEventHandler PropertyChanged;
 
