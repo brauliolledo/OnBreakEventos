@@ -22,6 +22,7 @@ namespace OnBreakEventos
         public TipoEventoDAO TipoEventoDAO { get; set; }
         public ModalidadServicioDAO ModalidadServicioDAO { get; set; }
         public ClienteDAO ClienteDAO { get; set; }
+        public TipoAmbientacionDAO TipoAmbientacionDAO { get; set; }
 
 
         private ContratoEntity _contrato;
@@ -33,9 +34,6 @@ namespace OnBreakEventos
             get
             {
                 return _contrato;
-
-
-
             }
             set
             {
@@ -104,12 +102,29 @@ namespace OnBreakEventos
             }
         }
 
+        private List<TipoAmbientacionEntity> _tiposAmbientacion;
+
+        public List<TipoAmbientacionEntity> TiposAmbientacion
+        {
+            get
+            {
+                return _tiposAmbientacion;
+            }
+
+            set
+            {
+                _tiposAmbientacion = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         public AdministracionContratoViewModel()
         {
             ContratoDAO = new ContratoDAO();
             TipoEventoDAO = new TipoEventoDAO();
             ModalidadServicioDAO = new ModalidadServicioDAO();
             ClienteDAO = new ClienteDAO();
+            TipoAmbientacionDAO = new TipoAmbientacionDAO();
 
             Contrato = new NullContratoEntity();
 
@@ -117,6 +132,7 @@ namespace OnBreakEventos
             Contrato.Cliente.PropertyChanged += Cliente_PropertyChanged;
 
             TiposEvento = TipoEventoDAO.BuscarTodo();
+            TiposAmbientacion = TipoAmbientacionDAO.ObtenerTodo();
         }
 
         private void Cliente_PropertyChanged(object sender, PropertyChangedEventArgs e)

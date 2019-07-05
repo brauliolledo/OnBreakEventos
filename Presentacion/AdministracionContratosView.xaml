@@ -126,9 +126,13 @@
 
         <Label Content="Ambientación:" HorizontalAlignment="Left" Margin="364,386,0,0" VerticalAlignment="Top"/>
         <ComboBox HorizontalAlignment="Left" Margin="459,386,0,0" VerticalAlignment="Top" Width="163"
-                  IsEnabled="{Binding Contrato.Tipo, Converter={StaticResource ClaseTienePropiedadConverter}, ConverterParameter='Ambientacion'}">
-            <ComboBoxItem Content="Básica" HorizontalAlignment="Left" Width="161"/>
-            <ComboBoxItem Content="Personalizada" HorizontalAlignment="Left" Width="161"/>
+                  IsEnabled="{Binding Contrato.Tipo, Converter={StaticResource ClaseTienePropiedadConverter}, ConverterParameter='Ambientacion'}"
+                  ItemsSource="{Binding TiposAmbientacion}" DisplayMemberPath="Descripcion">
+            <ComboBox.SelectedItem>
+                <PriorityBinding FallbackValue="">
+                    <Binding Path="Contrato.Tipo.Ambientacion"></Binding>
+                </PriorityBinding>
+            </ComboBox.SelectedItem>
         </ComboBox>
         <CheckBox Content="Música ambiental"
                   IsEnabled="{Binding Contrato.Tipo, Converter={StaticResource ClaseTienePropiedadConverter}, ConverterParameter='MusicaAmbiental'}"
