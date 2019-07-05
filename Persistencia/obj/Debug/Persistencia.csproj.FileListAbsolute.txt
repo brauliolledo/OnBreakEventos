@@ -1,0 +1,14 @@
+C:\Users\Brayan\Desktop\Desarrollo\OnBreakEventos-master\Persistencia\bin\Debug\Persistencia.exe.config
+C:\Users\Brayan\Desktop\Desarrollo\OnBreakEventos-master\Persistencia\bin\Debug\Persistencia.exe
+C:\Users\Brayan\Desktop\Desarrollo\OnBreakEventos-master\Persistencia\bin\Debug\Persistencia.pdb
+C:\Users\Brayan\Desktop\Desarrollo\OnBreakEventos-master\Persistencia\obj\Debug\Persistencia.csprojAssemblyReference.cache
+C:\Users\Brayan\Desktop\Desarrollo\OnBreakEventos-master\Persistencia\obj\Debug\Persistencia.csproj.CoreCompileInputs.cache
+C:\Users\Brayan\Desktop\Desarrollo\OnBreakEventos-master\Persistencia\obj\Debug\Persistencia.exe
+C:\Users\Brayan\Desktop\Desarrollo\OnBreakEventos-master\Persistencia\obj\Debug\Persistencia.pdb
+C:\Users\braul\Downloads\OnBreakEventos-master\Persistencia\bin\Debug\Persistencia.exe.config
+C:\Users\braul\Downloads\OnBreakEventos-master\Persistencia\bin\Debug\Persistencia.exe
+C:\Users\braul\Downloads\OnBreakEventos-master\Persistencia\bin\Debug\Persistencia.pdb
+C:\Users\braul\Downloads\OnBreakEventos-master\Persistencia\obj\Debug\Persistencia.csproj.CoreCompileInputs.cache
+C:\Users\braul\Downloads\OnBreakEventos-master\Persistencia\obj\Debug\Persistencia.exe
+C:\Users\braul\Downloads\OnBreakEventos-master\Persistencia\obj\Debug\Persistencia.pdb
+C:\Users\braul\Downloads\OnBreakEventos-master\Persistencia\obj\Debug\Persistencia.csprojAssemblyReference.cache
