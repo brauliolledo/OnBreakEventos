@@ -1,10 +1,10 @@
 C:\Users\braul\Downloads\OnBreakEventos-master\Negocio\bin\Debug\Negocio.dll
 C:\Users\braul\Downloads\OnBreakEventos-master\Negocio\bin\Debug\Negocio.pdb
-C:\Users\braul\Downloads\OnBreakEventos-master\Negocio\obj\Debug\Negocio.csprojAssemblyReference.cache
-C:\Users\braul\Downloads\OnBreakEventos-master\Negocio\obj\Debug\Negocio.csproj.CoreCompileInputs.cache
-C:\Users\braul\Downloads\OnBreakEventos-master\Negocio\obj\Debug\Negocio.dll
-C:\Users\braul\Downloads\OnBreakEventos-master\Negocio\obj\Debug\Negocio.pdb
 C:\Users\braul\Downloads\OnBreakEventos-master\Negocio\bin\Debug\Persistencia.dll
 C:\Users\braul\Downloads\OnBreakEventos-master\Negocio\bin\Debug\Persistencia.pdb
 C:\Users\braul\Downloads\OnBreakEventos-master\Negocio\bin\Debug\Persistencia.dll.config
+C:\Users\braul\Downloads\OnBreakEventos-master\Negocio\obj\Debug\Negocio.csprojAssemblyReference.cache
+C:\Users\braul\Downloads\OnBreakEventos-master\Negocio\obj\Debug\Negocio.csproj.CoreCompileInputs.cache
 C:\Users\braul\Downloads\OnBreakEventos-master\Negocio\obj\Debug\Negocio.csproj.CopyComplete
+C:\Users\braul\Downloads\OnBreakEventos-master\Negocio\obj\Debug\Negocio.dll
+C:\Users\braul\Downloads\OnBreakEventos-master\Negocio\obj\Debug\Negocio.pdb
