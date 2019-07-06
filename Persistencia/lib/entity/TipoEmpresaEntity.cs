@@ -29,6 +29,8 @@ namespace Persistencia.lib.entity
         public override string ToString()
         {
             return Descripcion;
-        }        
+        }
+
+
     }
 }

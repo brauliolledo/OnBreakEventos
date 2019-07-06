@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Persistencia.lib.entity
 {
 #pragma warning disable CS0659 // Type overrides Object.Equals(object o) but does not override Object.GetHashCode()
     public class ModalidadServicioEntity
 #pragma warning restore CS0659 // Type overrides Object.Equals(object o) but does not override Object.GetHashCode()
+
     {
         private string id;
 
@@ -64,12 +66,14 @@ namespace Persistencia.lib.entity
             return Nombre;
         }
 
+
         public override bool Equals(object obj)
         {
-            var entity = obj as ModalidadServicioEntity;
-            return entity != null &&
-                   id == entity.Id &&
-                   nombre == entity.Nombre;
+            if (obj == null || obj == DependencyProperty.UnsetValue) return false;
+
+            return (obj as ModalidadServicioEntity).Id == this.Id;
         }
+
+
     }
 }

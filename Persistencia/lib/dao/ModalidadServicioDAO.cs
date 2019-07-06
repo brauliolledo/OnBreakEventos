@@ -30,7 +30,7 @@ namespace Persistencia.lib.dao
                 {
                     Id = fila.IdModalidad,
                     TipoEvento = tipoEventoDao.BuscarPorId(fila.IdTipoEvento), // El primero o nulo
-                    Nombre = fila.Nombre,
+                    Nombre = fila.Nombre.Replace("\t", ""),
                     ValorBase = fila.ValorBase,
                     PersonalBase = fila.PersonalBase
             });
@@ -73,7 +73,7 @@ namespace Persistencia.lib.dao
                 ModalidadServicioEntity modalidadServicio = new ModalidadServicioEntity();
 
                 modalidadServicio.Id = fila.IdModalidad;
-                modalidadServicio.Nombre = fila.Nombre;
+                modalidadServicio.Nombre = fila.Nombre.Replace("\t", "");
                 modalidadServicio.PersonalBase = fila.PersonalBase;
                 modalidadServicio.ValorBase = fila.ValorBase;
                 modalidadServicio.TipoEvento = tipoEventoDao.BuscarPorId(idTipoEvento);
@@ -83,5 +83,7 @@ namespace Persistencia.lib.dao
 
             return modalidades;
         }
+
+
     }
 }

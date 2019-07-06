@@ -20,6 +20,10 @@
 
 namespace Persistencia.OnBreakDataSetTableAdapters
 {
+    partial class CoffeeBreakTableAdapter
+    {
+    }
+
     partial class TipoEventoTableAdapter
     {
     }

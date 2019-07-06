@@ -21,7 +21,25 @@ namespace Persistencia.lib.dao
 
             if(fila != null)
             {
-                tipoEvento = new TipoEventoEntity();
+
+                if (fila.IdTipoEvento == CoffeeBreakDAO.ReferenciaIdTipoEvento)
+                {
+                    tipoEvento = new CoffeeBreakEntity();
+                }
+                else if (fila.IdTipoEvento == CocktailDAO.ReferenciaIdTipoEvento)
+                {
+                    tipoEvento = new CocktailEntity();
+                }
+                else if (fila.IdTipoEvento == CenaDAO.ReferenciaIdTipoEvento)
+                {
+                    tipoEvento = new CenaEntity();
+                }
+                else
+                {
+                    tipoEvento = new TipoEventoEntity();
+                }
+
+
                 tipoEvento.Id = fila.IdTipoEvento;
                 tipoEvento.Descripcion = fila.Descripcion;
             }
@@ -41,11 +59,29 @@ namespace Persistencia.lib.dao
 
             foreach(TipoEventoRow fila in tiposEventoAdapter.GetData())
             {
-                tiposEvento.Add(new TipoEventoEntity
+                TipoEventoEntity tipoEvento = null;
+
+                if (fila.IdTipoEvento == CoffeeBreakDAO.ReferenciaIdTipoEvento)
                 {
-                    Id = fila.IdTipoEvento,
-                    Descripcion = fila.Descripcion
-                });
+                    tipoEvento = new CoffeeBreakEntity();
+                }
+                else if (fila.IdTipoEvento == CocktailDAO.ReferenciaIdTipoEvento)
+                {
+                    tipoEvento = new CocktailEntity();
+                }
+                else if (fila.IdTipoEvento == CenaDAO.ReferenciaIdTipoEvento)
+                {
+                    tipoEvento = new CenaEntity();
+                }
+                else
+                {
+                    tipoEvento = new TipoEventoEntity();
+                }
+
+                tipoEvento.Id = fila.IdTipoEvento;
+                tipoEvento.Descripcion = fila.Descripcion;
+
+                tiposEvento.Add(tipoEvento);
             }
 
             return tiposEvento;

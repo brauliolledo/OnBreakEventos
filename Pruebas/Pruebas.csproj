@@ -56,10 +56,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\V1_Memento\Persistencia\Persistencia.csproj">
-      <Project>{fcc9bfa8-0cc2-43c0-aa76-9c0472d1e222}</Project>
-      <Name>Persistencia</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Negocio\Negocio.csproj">
       <Project>{83a24535-c8f8-4d40-8555-e7b2990af075}</Project>
       <Name>Negocio</Name>

@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{FCC9BFA8-0CC2-43C0-AA76-9C0472D1E222}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>Library</OutputType>
     <RootNamespace>Persistencia</RootNamespace>
     <AssemblyName>Persistencia</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
@@ -32,6 +32,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -41,34 +44,40 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="lib\dao\ActividadEmpresaDAO.cs" />
+    <Compile Include="lib\dao\AmbientacionDAO.cs" />
+    <Compile Include="lib\dao\CacheContratoDAO.cs" />
+    <Compile Include="lib\dao\CenaDAO.cs" />
     <Compile Include="lib\dao\ClienteDAO.cs" />
+    <Compile Include="lib\dao\CocktailDAO.cs" />
+    <Compile Include="lib\dao\CoffeeBreakDAO.cs" />
     <Compile Include="lib\dao\ContratoDAO.cs" />
     <Compile Include="lib\dao\LoginDAO.cs" />
     <Compile Include="lib\dao\ModalidadServicioDAO.cs" />
-    <Compile Include="lib\dao\RegistroContratoDAO.cs" />
     <Compile Include="lib\dao\TipoEmpresaDAO.cs" />
     <Compile Include="lib\dao\TipoEventoDAO.cs" />
+    <Compile Include="lib\entity\AmbientacionEntity.cs" />
+    <Compile Include="lib\entity\CenaEntity.cs" />
     <Compile Include="lib\entity\ClienteEntity.cs" />
     <Compile Include="lib\entity\ActividadEmpresaEntity.cs" />
+    <Compile Include="lib\entity\CocktailEntity.cs" />
+    <Compile Include="lib\entity\CoffeeBreakEntity.cs" />
     <Compile Include="lib\entity\ContratoEntity.cs" />
     <Compile Include="lib\entity\ModalidadServicioEntity.cs" />
     <Compile Include="lib\entity\TipoEmpresaEntity.cs" />
     <Compile Include="lib\entity\TipoEventoEntity.cs" />
+    <Compile Include="lib\memento\AdministracionContratosMemento.cs" />
     <Compile Include="OnBreakDataSet.cs">
       <DependentUpon>OnBreakDataSet.xsd</DependentUpon>
     </Compile>
-    <Compile Include="OnBreakDataSet.designer.cs">
-      <DependentUpon>OnBreakDataSet.cs</DependentUpon>
-    </Compile>
-    <Compile Include="OnBreakDataSet1.Designer.cs">
+    <Compile Include="OnBreakDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>OnBreakDataSet.xsd</DependentUpon>
     </Compile>
-    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -83,7 +92,7 @@
     </None>
     <None Include="OnBreakDataSet.xsd">
       <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>OnBreakDataSet1.Designer.cs</LastGenOutput>
+      <LastGenOutput>OnBreakDataSet.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
     <None Include="OnBreakDataSet.xss">
