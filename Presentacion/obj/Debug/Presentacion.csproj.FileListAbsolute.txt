@@ -113,3 +113,42 @@ C:\Users\braul\Desktop\Final\Presentacion\obj\Debug\Presentacion.csproj.CoreComp
 C:\Users\braul\Desktop\Final\Presentacion\obj\Debug\Presentacion.csproj.CopyComplete
 C:\Users\braul\Desktop\Final\Presentacion\obj\Debug\OnBreakEventos.exe
 C:\Users\braul\Desktop\Final\Presentacion\obj\Debug\OnBreakEventos.pdb
+C:\Users\braul\Desktop\Final - copia\Presentacion\bin\Debug\OnBreakEventos.exe.config
+C:\Users\braul\Desktop\Final - copia\Presentacion\bin\Debug\OnBreakEventos.exe
+C:\Users\braul\Desktop\Final - copia\Presentacion\bin\Debug\OnBreakEventos.pdb
+C:\Users\braul\Desktop\Final - copia\Presentacion\bin\Debug\ControlzEx.dll
+C:\Users\braul\Desktop\Final - copia\Presentacion\bin\Debug\MahApps.Metro.dll
+C:\Users\braul\Desktop\Final - copia\Presentacion\bin\Debug\Negocio.dll
+C:\Users\braul\Desktop\Final - copia\Presentacion\bin\Debug\Persistencia.dll
+C:\Users\braul\Desktop\Final - copia\Presentacion\bin\Debug\System.Windows.Interactivity.dll
+C:\Users\braul\Desktop\Final - copia\Presentacion\bin\Debug\Negocio.pdb
+C:\Users\braul\Desktop\Final - copia\Presentacion\bin\Debug\Persistencia.pdb
+C:\Users\braul\Desktop\Final - copia\Presentacion\bin\Debug\Persistencia.dll.config
+C:\Users\braul\Desktop\Final - copia\Presentacion\bin\Debug\ControlzEx.pdb
+C:\Users\braul\Desktop\Final - copia\Presentacion\bin\Debug\MahApps.Metro.pdb
+C:\Users\braul\Desktop\Final - copia\Presentacion\bin\Debug\MahApps.Metro.xml
+C:\Users\braul\Desktop\Final - copia\Presentacion\obj\Debug\Presentacion.csprojAssemblyReference.cache
+C:\Users\braul\Desktop\Final - copia\Presentacion\obj\Debug\AdministracionClientes.g.cs
+C:\Users\braul\Desktop\Final - copia\Presentacion\obj\Debug\AdministracionContratosView.g.cs
+C:\Users\braul\Desktop\Final - copia\Presentacion\obj\Debug\ListadoClientes.g.cs
+C:\Users\braul\Desktop\Final - copia\Presentacion\obj\Debug\ListadoContratosView.g.cs
+C:\Users\braul\Desktop\Final - copia\Presentacion\obj\Debug\MainWindow.g.cs
+C:\Users\braul\Desktop\Final - copia\Presentacion\obj\Debug\VentanaLogin.g.cs
+C:\Users\braul\Desktop\Final - copia\Presentacion\obj\Debug\App.g.cs
+C:\Users\braul\Desktop\Final - copia\Presentacion\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\braul\Desktop\Final - copia\Presentacion\obj\Debug\OnBreakEventos_MarkupCompile.cache
+C:\Users\braul\Desktop\Final - copia\Presentacion\obj\Debug\OnBreakEventos_MarkupCompile.lref
+C:\Users\braul\Desktop\Final - copia\Presentacion\obj\Debug\App.baml
+C:\Users\braul\Desktop\Final - copia\Presentacion\obj\Debug\AdministracionClientes.baml
+C:\Users\braul\Desktop\Final - copia\Presentacion\obj\Debug\AdministracionContratosView.baml
+C:\Users\braul\Desktop\Final - copia\Presentacion\obj\Debug\ListadoClientes.baml
+C:\Users\braul\Desktop\Final - copia\Presentacion\obj\Debug\ListadoContratosView.baml
+C:\Users\braul\Desktop\Final - copia\Presentacion\obj\Debug\MainWindow.baml
+C:\Users\braul\Desktop\Final - copia\Presentacion\obj\Debug\VentanaLogin.baml
+C:\Users\braul\Desktop\Final - copia\Presentacion\obj\Debug\OnBreakEventos.g.resources
+C:\Users\braul\Desktop\Final - copia\Presentacion\obj\Debug\OnBreakEventos.Properties.Resources.resources
+C:\Users\braul\Desktop\Final - copia\Presentacion\obj\Debug\Presentacion.csproj.GenerateResource.cache
+C:\Users\braul\Desktop\Final - copia\Presentacion\obj\Debug\Presentacion.csproj.CoreCompileInputs.cache
+C:\Users\braul\Desktop\Final - copia\Presentacion\obj\Debug\Presentacion.csproj.CopyComplete
+C:\Users\braul\Desktop\Final - copia\Presentacion\obj\Debug\OnBreakEventos.exe
+C:\Users\braul\Desktop\Final - copia\Presentacion\obj\Debug\OnBreakEventos.pdb
